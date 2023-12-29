@@ -2,10 +2,11 @@
 
 namespace chip8_emulator
 {
-	Chip8_Instructions::Chip8_Instructions(CHIP8_Display& disp, CHIP8_Memory& mem)
-	:
-	chipDisplay(disp),
-	chipMemory(mem)
+
+Chip8_Instructions::Chip8_Instructions(CHIP8_Display& disp, CHIP8_Memory& mem)
+:
+chipDisplay(disp),
+chipMemory(mem)
 {
 }
 
