@@ -46,7 +46,7 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	}
 }
 
-void CHIP8_Display::run()
+void CHIP8_Display::displayLoop()
 {
 	while (!v_stop)
 	{
@@ -60,7 +60,6 @@ void CHIP8_Display::run()
 		}
 
 		SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
-
 		SDL_RenderPresent(v_renderer);
 	}
 
@@ -68,4 +67,5 @@ void CHIP8_Display::run()
 	SDL_DestroyWindow(v_window);
 	SDL_Quit();
 }
+
 }//namespace chip8_emulator

@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <vector>
+#include <thread>
 #include "Display.h"
 #include "Memory.h"
 #include "Instructions.h"
@@ -14,11 +15,14 @@ class Chip8_Manager
 {
 public:
 	Chip8_Manager();
+	void run(std::string a_filename);
+
+private:
 	bool loadROM();
 	uint8_t fetch();
 	opcodes decode(uint8_t a_data);
 	bool execute(uint8_t a_data, opcodes a_code);
-	void run(std::string a_filename);
+
 private:
 	CHIP8_Memory v_memory;
 	CHIP8_Display v_display;

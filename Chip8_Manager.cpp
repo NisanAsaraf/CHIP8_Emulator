@@ -61,6 +61,11 @@ void Chip8_Manager::run(std::string a_filename)
 {
     uint8_t data;
     loadROM();
+
+    std::thread displayThread([this](){
+            v_display.displayLoop();
+        });
+
     while (!v_stop)
     {
         data = fetch();
@@ -69,6 +74,7 @@ void Chip8_Manager::run(std::string a_filename)
             return;
         }
     }
-}
+
+    displayThread.join();
 
 }// namespace chip8_emulator

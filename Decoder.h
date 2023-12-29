@@ -8,7 +8,6 @@ namespace chip8_emulator
 class Chip8_Decoder
 {
 public:
-	Chip8_Decoder() = default;
 	uint8_t getMSB(uint16_t a_code);
 	opcodes decode(uint16_t a_code);
 };
