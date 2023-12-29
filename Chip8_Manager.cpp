@@ -16,7 +16,6 @@ v_stop{ false }
 bool Chip8_Manager::loadROM()
 {
     std::ifstream file(v_filename, std::ios::binary);
-    std::vector<uint16_t> romData;
 
     if (!file) 
     {
@@ -25,20 +24,16 @@ bool Chip8_Manager::loadROM()
     }
 
     std::vector<uint8_t> romData(std::istreambuf_iterator<char>(file), {});
-
+    
     for (const auto& value : romData)
     {
-        std::cout << std::hex << static_cast<int>(value) << " ";
+        v_memory.insertDataToRam(value);
     }
-    std::cout << std::endl;
 
     if (romData.size() > 4096 - 0x200) //first 512 bytes are reserved
     {
         return false;
     }
-
-    v_memory.setCapacity(romData.size());
-    std::copy(romData.begin(), romData.end(), v_memory.getRAMbegin() + 0x200);
 
     return true;
 }

@@ -15,7 +15,7 @@ public:
     uint8_t getRegister(uint8_t a_pos);
     uint16_t getRAMdata();
     size_t getRAMcapacity();
-    std::array<uint8_t, 4096>::iterator getRAMbegin();
+    void insertDataToRam(uint8_t a_data);
     void incrementCounter();
     void setCapacity(size_t a_capacity);
     void setRegister(uint8_t a_index, uint8_t a_val);

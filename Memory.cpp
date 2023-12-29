@@ -45,9 +45,9 @@ void CHIP8_Memory::printRAM()
     std::cout << std::endl;
 }
 
-std::array<uint8_t, 4096>::iterator CHIP8_Memory::getRAMbegin()
+void CHIP8_Memory::insertDataToRam(uint8_t a_data)
 {
-    return v_ram.begin();
+    v_ram[ramCapacity++] = a_data;
 }
 
 uint16_t CHIP8_Memory::getRAMdata()
