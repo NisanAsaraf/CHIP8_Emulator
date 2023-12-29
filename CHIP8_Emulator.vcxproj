@@ -134,6 +134,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Decoder.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Instructions.h" />
