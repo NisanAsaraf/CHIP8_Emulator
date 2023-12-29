@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\..\..\Downloads\ibm.ch8" />
     <None Include="IBMLogo.ch8" />
     <None Include="packages.config" />
   </ItemGroup>

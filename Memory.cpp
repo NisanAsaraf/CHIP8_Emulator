@@ -36,9 +36,11 @@ void CHIP8_Memory::setCapacity(size_t a_capacity)
 
 void CHIP8_Memory::printRAM()
 {
+    std::cout << ramCapacity << std::endl;
+
     for (int i = 0; i < ramCapacity; ++i) 
     {
-        std::cout << std::hex << v_ram[i] << " ";
+        std::cout << std::hex << static_cast<uint16_t>(v_ram[i]) << " ";
     }
     std::cout << std::endl;
 }
@@ -48,14 +50,15 @@ std::array<uint8_t, 4096>::iterator CHIP8_Memory::getRAMbegin()
     return v_ram.begin();
 }
 
-uint8_t CHIP8_Memory::getRAMdata()
+uint16_t CHIP8_Memory::getRAMdata()
 {
-    return v_ram[program_counter];
+    uint16_t data = (static_cast<uint16_t> (v_ram[program_counter]) << 8 | static_cast<uint16_t>(v_ram[program_counter + 1]));
+    return data;
 }
 
 void CHIP8_Memory::incrementCounter()
 {
-    ++program_counter;
+    program_counter += 2;
 }
 
 void CHIP8_Memory::setRegister(uint8_t a_index, uint8_t a_val)
