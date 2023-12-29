@@ -2,6 +2,8 @@
 #define CHIP8_MEMORY_H
 #include <array>
 #include <cstdint>
+#include <iostream>
+
 namespace chip8_emulator
 {
 class CHIP8_Memory 
@@ -19,7 +21,7 @@ public:
     void setRegister(uint8_t a_index, uint8_t a_val);
     void addRegister(uint8_t a_index, uint8_t a_val);
     void setIndexRegister(uint16_t a_data);
-
+    void printRAM();
 private:
     std::array<uint8_t, 4096> v_ram;
     std::array<uint8_t, 16> v_registers; 

@@ -60,20 +60,27 @@ bool Chip8_Manager::execute(uint8_t a_data, opcodes a_code)
 void Chip8_Manager::run(std::string a_filename)
 {
     uint8_t data;
-    loadROM();
-
-    std::thread displayThread([this]() {
-        v_display.displayLoop();
-        });
-
-    while (!v_stop)
+    if (!loadROM())
     {
-        data = fetch();
-        if (!execute(data, decode(data)))
-        {
-            return;
-        }
+        std::cout << "failed loading ROM" << std::endl;
+        return;
     }
+
+    std::thread displayThread([this]() 
+    {
+        v_display.displayLoop();
+    });
+
+    v_memory.printRAM();
+
+    //while (!v_stop)
+    //{
+    //    data = fetch();
+    //    if (!execute(data, decode(data)))
+    //    {
+    //        return;
+    //    }
+    //}
 
     displayThread.join();
 }

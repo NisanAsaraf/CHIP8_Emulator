@@ -11,7 +11,7 @@ CHIP8_Display::CHIP8_Display()
 		return;
 	}
 
-	v_window = SDL_CreateWindow("CHIP-8", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 64, 32, SDL_WINDOW_SHOWN);
+	v_window = SDL_CreateWindow("CHIP-8", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 64*8, 32*8, SDL_WINDOW_SHOWN);
 
 	if (v_window == NULL)
 	{
@@ -21,7 +21,8 @@ CHIP8_Display::CHIP8_Display()
 
 	v_renderer = SDL_CreateRenderer(v_window, -1, SDL_RENDERER_ACCELERATED);
 
-	if (v_renderer == NULL) {
+	if (v_renderer == NULL) 
+	{
 		SDL_DestroyWindow(v_window);
 		SDL_Quit();
 		return;
@@ -48,9 +49,9 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 
 void CHIP8_Display::displayLoop()
 {
+	SDL_Event e;
 	while (!v_stop)
 	{
-		SDL_Event e;
 		while (SDL_PollEvent(&e) != 0)
 		{
 			if (e.type == SDL_QUIT)
@@ -58,7 +59,6 @@ void CHIP8_Display::displayLoop()
 				v_stop = true;
 			}
 		}
-
 		SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
 		SDL_RenderPresent(v_renderer);
 	}

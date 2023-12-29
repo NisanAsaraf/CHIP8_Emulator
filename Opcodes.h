@@ -1,5 +1,6 @@
 #ifndef OPCODES_H
 #define OPCODES_H
+#include <iostream>
 namespace chip8_emulator
 {
 enum class opcodes

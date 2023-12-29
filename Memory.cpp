@@ -28,6 +28,15 @@ size_t CHIP8_Memory::getRAMsize()
     return v_ram.size();
 }
 
+void CHIP8_Memory::printRAM()
+{
+    for (int i = 0; i < v_ram.size(); ++i) 
+    {
+        std::cout << v_ram[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 std::array<uint8_t, 4096>::iterator CHIP8_Memory::getRAMbegin()
 {
     return v_ram.begin();
