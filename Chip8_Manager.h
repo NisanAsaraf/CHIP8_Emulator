@@ -1,5 +1,8 @@
 #ifndef CHIP8_MANAGER_H
 #define CHIP8_MANAGER_H
+
+#include <fstream>
+#include <vector>
 #include "Display.h"
 #include "Memory.h"
 #include "Instructions.h"
@@ -11,7 +14,10 @@ class Chip8_Manager
 {
 public:
 	Chip8_Manager() = default;
-	void loadROM();
+	bool loadROM(const std::string& filename);
+	bool fetch();
+	bool decode();
+	bool execute();
 private:
 	CHIP8_Memory v_memory;
 	CHIP8_Display v_display;

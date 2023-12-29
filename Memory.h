@@ -4,15 +4,15 @@
 #include <cstdint>
 namespace chip8_emulator
 {
-
 class CHIP8_Memory 
 {
-
 public:
 
     CHIP8_Memory();
     void jumpToAddress(uint16_t a_address);
     uint8_t getRegister(uint8_t a_pos);
+    size_t getRAMsize();
+    std::array<uint8_t, 4096>::iterator getRAMbegin();
     void setRegister(uint8_t a_index, uint8_t a_val);
     void addRegister(uint8_t a_index, uint8_t a_val);
     void setIndexRegister(uint16_t a_data);

@@ -23,6 +23,16 @@ uint8_t CHIP8_Memory::getRegister(uint8_t a_pos)
     return v_registers[a_pos];
 }
 
+size_t CHIP8_Memory::getRAMsize()
+{
+    return v_ram.size();
+}
+
+std::array<uint8_t, 4096>::iterator CHIP8_Memory::getRAMbegin()
+{
+    return v_ram.begin();
+}
+
 void CHIP8_Memory::setRegister(uint8_t a_index, uint8_t a_val)
 {
     v_registers[a_index] = a_val;
