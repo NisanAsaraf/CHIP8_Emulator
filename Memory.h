@@ -11,8 +11,11 @@ public:
     CHIP8_Memory();
     void jumpToAddress(uint16_t a_address);
     uint8_t getRegister(uint8_t a_pos);
+    uint8_t getRAMdata();
     size_t getRAMsize();
     std::array<uint8_t, 4096>::iterator getRAMbegin();
+
+    void incrementCounter();
     void setRegister(uint8_t a_index, uint8_t a_val);
     void addRegister(uint8_t a_index, uint8_t a_val);
     void setIndexRegister(uint16_t a_data);
@@ -26,9 +29,9 @@ private:
     uint8_t delay_timer; 
     uint8_t sound_timer; 
 
-    static constexpr uint16_t STACK_START = 0xE00; // Start address of the stack
-    static constexpr uint16_t STACK_END = 0xFFF; // End address of the stack
-    static constexpr uint16_t DISPLAY_START = 0xF00; // Start address of the display memory
+    static constexpr uint16_t STACK_START = 0xE00;      // Start address of the stack
+    static constexpr uint16_t STACK_END = 0xFFF;        // End address of the stack
+    static constexpr uint16_t DISPLAY_START = 0xF00;    // Start address of the display memory
 };
 }//namespace chip8_emulator
 #endif

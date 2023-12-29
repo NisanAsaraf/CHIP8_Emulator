@@ -24,20 +24,27 @@ bool Chip8_Manager::loadROM(const std::string& filename)
     return true;
 }
 
-bool Chip8_Manager::fetch()
+uint8_t Chip8_Manager::fetch()
 {
-
+    uint8_t data = v_memory.getRAMdata();
+    v_memory.incrementCounter();
+    return data;
 }
 
-bool Chip8_Manager::execute()
+opcodes Chip8_Manager::decode(uint8_t a_data)
 {
-
+    return v_decoder.decode(a_data);
 }
 
-bool Chip8_Manager::execute()
+bool Chip8_Manager::execute(uint8_t a_data, opcodes a_code)
 {
-
+    if (v_instructions.opcodesMap.find(a_code) != v_instructions.opcodesMap.end())
+    {
+        auto instruction = v_instructions.opcodesMap[a_code];
+        instruction(v_instructions,a_data);
+        return true;
+    }
+    return false;
 }
-
 
 }// namespace chip8_emulator

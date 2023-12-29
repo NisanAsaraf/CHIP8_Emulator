@@ -33,6 +33,16 @@ std::array<uint8_t, 4096>::iterator CHIP8_Memory::getRAMbegin()
     return v_ram.begin();
 }
 
+uint8_t CHIP8_Memory::getRAMdata()
+{
+    return v_ram[program_counter];
+}
+
+void CHIP8_Memory::incrementCounter()
+{
+    ++program_counter;
+}
+
 void CHIP8_Memory::setRegister(uint8_t a_index, uint8_t a_val)
 {
     v_registers[a_index] = a_val;

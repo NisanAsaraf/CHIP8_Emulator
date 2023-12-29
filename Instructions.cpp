@@ -8,9 +8,15 @@ Chip8_Instructions::Chip8_Instructions(CHIP8_Display& disp, CHIP8_Memory& mem)
 chipDisplay(disp),
 chipMemory(mem)
 {
+	opcodesMap[opcodes::CLEAR_SCREEN] = &Chip8_Instructions::clearScreen;
+	opcodesMap[opcodes::JUMP] = &Chip8_Instructions::Jump;
+	opcodesMap[opcodes::SETREG] = &Chip8_Instructions::setRegister;
+	opcodesMap[opcodes::ADDREG] = &Chip8_Instructions::addRegister;
+	opcodesMap[opcodes::SETI] = &Chip8_Instructions::setIndexRegister;
+	opcodesMap[opcodes::DRAW] = &Chip8_Instructions::draw;
 }
 
-void Chip8_Instructions::clearScreen()
+void Chip8_Instructions::clearScreen(uint16_t a_data)
 {
 	chipDisplay.clearDisplay();
 }
