@@ -5,10 +5,12 @@
 #include "Display.h"
 #include "Memory.h"
 
-class Instructions
+namespace chip8_emulator
+{
+class Chip8_Instructions
 {
 public:
-	Instructions(CHIP8_Display& disp, CHIP8_Memory& mem) 
+	Chip8_Instructions(CHIP8_Display& disp, CHIP8_Memory& mem)
 	: 
 	chipDisplay(disp), 
 	chipMemory(mem)
@@ -62,5 +64,5 @@ private:
 	CHIP8_Display& chipDisplay;
 	CHIP8_Memory& chipMemory;
 };
-
+}
 #endif

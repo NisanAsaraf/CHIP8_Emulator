@@ -2,6 +2,9 @@
 #define CHIP8_DISPLAY_H
 #include <SDL.h>
 
+namespace chip8_emulator
+{
+
 class CHIP8_Display
 {
 public:
@@ -79,5 +82,5 @@ private:
 	bool v_stop;
 };
 
-
+}//namespace chip8_emulator
 #endif

@@ -130,10 +130,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Chip8_Manager.cpp" />
+    <ClCompile Include="Decoder.cpp" />
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Memory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chip8_Manager.h" />
     <ClInclude Include="Decoder.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Memory.h" />

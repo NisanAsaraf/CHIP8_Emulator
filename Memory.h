@@ -2,6 +2,8 @@
 #define CHIP8_MEMORY_H
 #include <array>
 #include <cstdint>
+namespace chip8_emulator
+{
 
 class CHIP8_Memory 
 {
@@ -58,5 +60,5 @@ private:
     static constexpr uint16_t STACK_END = 0xFFF; // End address of the stack
     static constexpr uint16_t DISPLAY_START = 0xF00; // Start address of the display memory
 };
-
+}//namespace chip8_emulator
 #endif

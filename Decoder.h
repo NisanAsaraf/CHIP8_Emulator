@@ -3,9 +3,11 @@
 #include <cstdint>
 #include "Opcodes.h"
 
-class decoder
+namespace chip8_emulator
 {
-	decoder();
+class Chip8_Decoder
+{
+	Chip8_Decoder() = default;
 	uint8_t getMSB(uint16_t a_code)
 	{
 		return (a_code & 0xF000) >> 12;
@@ -66,4 +68,5 @@ class decoder
 		}
 	}
 };
+}//namespace chip8_emulator
 #endif
