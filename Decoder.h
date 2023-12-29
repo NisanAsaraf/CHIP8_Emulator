@@ -1,16 +1,7 @@
 #ifndef DECODER_H
 #define DECODER_H
 #include <cstdint>
-
-enum class opcodes
-{
-	CLEAR_SCREEN,	//00E0
-	JUMP,			//1NNN
-	SETREG,			//6XNN
-	ADDVREG,		//7XNN
-	SETI,			//ANNN
-	DRAW			//DXYN
-};
+#include "Opcodes.h"
 
 class decoder
 {
@@ -35,6 +26,7 @@ class decoder
 			}
 			break;
 		case 1:
+			return opcodes::JUMP;
 			break;
 		case 2:
 			break;
@@ -45,26 +37,31 @@ class decoder
 		case 5:
 			break;
 		case 6:
+			return opcodes::SETREG;
 			break;
 		case 7:
+			return opcodes::ADDREG;
 			break;
 		case 8:
 			break;
 		case 9:
 			break;
 		case 10:
+			return opcodes::SETI;
 			break;
 		case 11:
 			break;
 		case 12:
 			break;
 		case 13:
+			return opcodes::DRAW;
 			break;
 		case 14:
 			break;
 		case 15:
 			break;
 		default:
+			opcodes::UNKNOWN;
 			break;
 		}
 	}

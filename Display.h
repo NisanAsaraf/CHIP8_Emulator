@@ -32,6 +32,24 @@ public:
 		}
 	}
 
+	void clearDisplay()
+	{
+		SDL_SetRenderDrawColor(v_renderer, 0, 0, 0, 255);
+		SDL_RenderClear(v_renderer);
+	}
+
+	void draw(uint8_t a_x , uint8_t a_y, uint8_t a_n)
+	{
+		SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
+		for (int row = 0; row < a_n; ++row)
+		{
+			for (int col = 0; col < 8; ++col) 
+			{
+				SDL_RenderDrawPoint(v_renderer, a_x + col, a_y + row);
+			}
+		}
+	}
+
 	void run()
 	{
 		while (!v_stop) 
@@ -45,8 +63,6 @@ public:
 				}
 			}
 
-			SDL_SetRenderDrawColor(v_renderer, 0, 0, 0, 255);
-			SDL_RenderClear(v_renderer);
 			SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
 
 			SDL_RenderPresent(v_renderer);
