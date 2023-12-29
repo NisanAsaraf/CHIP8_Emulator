@@ -2,10 +2,20 @@
 
 namespace chip8_emulator
 {
-
-bool Chip8_Manager::loadROM(const std::string& filename)
+Chip8_Manager::Chip8_Manager()
+:
+v_memory{},
+v_display{},
+v_decoder{},
+v_instructions{ v_display, v_memory },
+v_stop{ false }
 {
-    std::ifstream file(filename, std::ios::binary);
+   
+}
+
+bool Chip8_Manager::loadROM()
+{
+    std::ifstream file(v_filename, std::ios::binary);
 
     if (!file) 
     {
@@ -45,6 +55,20 @@ bool Chip8_Manager::execute(uint8_t a_data, opcodes a_code)
         return true;
     }
     return false;
+}
+
+void Chip8_Manager::run(std::string a_filename)
+{
+    uint8_t data;
+    loadROM();
+    while (!v_stop)
+    {
+        data = fetch();
+        if (!execute(data, decode(data)))
+        {
+            return;
+        }
+    }
 }
 
 }// namespace chip8_emulator
