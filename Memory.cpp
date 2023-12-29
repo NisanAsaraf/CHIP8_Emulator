@@ -5,6 +5,7 @@ namespace chip8_emulator
 CHIP8_Memory::CHIP8_Memory()
 {
     v_ram.fill(0);
+    ramCapacity = 0;
     v_registers.fill(0);
     v_stack.fill(0);
     program_counter = 0x200; // Start CHIP-8 programs typically at address 0x200
@@ -23,16 +24,21 @@ uint8_t CHIP8_Memory::getRegister(uint8_t a_pos)
     return v_registers[a_pos];
 }
 
-size_t CHIP8_Memory::getRAMsize()
+size_t CHIP8_Memory::getRAMcapacity()
 {
-    return v_ram.size();
+    return ramCapacity;
+}
+
+void CHIP8_Memory::setCapacity(size_t a_capacity)
+{
+    ramCapacity = a_capacity;
 }
 
 void CHIP8_Memory::printRAM()
 {
-    for (int i = 0; i < v_ram.size(); ++i) 
+    for (int i = 0; i < ramCapacity; ++i) 
     {
-        std::cout << v_ram[i] << " ";
+        std::cout << std::hex << v_ram[i] << " ";
     }
     std::cout << std::endl;
 }
