@@ -16,7 +16,7 @@ CHIP8_Memory::CHIP8_Memory()
 
 void CHIP8_Memory::jumpToAddress(uint16_t a_address)
 {
-    program_counter = a_address;
+    program_counter = (a_address + 0x200) - 1;
 }
 
 uint8_t CHIP8_Memory::getRegister(uint8_t a_pos)
