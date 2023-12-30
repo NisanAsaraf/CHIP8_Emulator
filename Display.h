@@ -11,7 +11,7 @@ public:
 	CHIP8_Display();
 	void clearDisplay();
 	void draw(uint8_t a_x, uint8_t a_y, uint8_t a_n);
-	void renderDisplay();
+	bool renderDisplay();
 	void quitDisplay();
 private:
 	SDL_Window* v_window = NULL;

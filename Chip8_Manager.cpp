@@ -52,6 +52,7 @@ opcodes Chip8_Manager::decode(uint8_t a_data)
 
 bool Chip8_Manager::execute(uint8_t a_data, opcodes a_code)
 {
+    std::cout << static_cast<int>(a_code) << "@" << std::endl;
     if (v_instructions.opcodesMap.find(a_code) != v_instructions.opcodesMap.end())
     {
         auto instruction = v_instructions.opcodesMap[a_code];
@@ -71,19 +72,19 @@ void Chip8_Manager::run(std::string a_filename)
         std::cout << "failed loading ROM" << std::endl;
         return;
     }
-
     v_memory.printRAM();
 
-    data = fetch();
-
-    //while (!v_stop)
-    //{
-    //    v_display.renderDisplay();
-    //    if (!execute(data, decode(data)))
-    //    {
-    //        return;
-    //    }
-    //}
+    while (!v_stop)
+    {
+        v_stop = v_display.renderDisplay();
+        data = fetch();
+        //std::cout << std::hex << static_cast<int>(data) << ", ";
+        if (!execute(data, decode(data)))
+        {
+            return;
+        }
+    }
+    v_display.quitDisplay();
 }
 
 }// namespace chip8_emulator

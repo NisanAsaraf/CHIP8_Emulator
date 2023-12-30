@@ -48,11 +48,22 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	}
 }
 
-void CHIP8_Display::renderDisplay()
+bool CHIP8_Display::renderDisplay() 
 {
 	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
 	SDL_RenderPresent(v_renderer);
+
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != 0) 
+	{
+		if (e.type == SDL_QUIT) 
+		{
+			return true;
+		}
+	}
+	return false;
 }
+
 
 void CHIP8_Display::quitDisplay()
 {

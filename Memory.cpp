@@ -59,7 +59,7 @@ uint16_t CHIP8_Memory::getRAMdata()
 
 void CHIP8_Memory::incrementCounter()
 {
-    if (program_counter > ramCapacity - 2)
+    if (program_counter - 0x200 > ramCapacity - 2)
     {
         return;
     }
