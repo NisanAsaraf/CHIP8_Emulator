@@ -8,6 +8,7 @@
 #include "Memory.h"
 #include "Instructions.h"
 #include "Decoder.h"
+#include <sstream>
 
 namespace chip8_emulator
 {

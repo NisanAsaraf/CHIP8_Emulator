@@ -38,16 +38,17 @@ void CHIP8_Memory::printRAM()
 {
     std::cout << ramCapacity << std::endl;
 
-    for (int i = 0; i < ramCapacity; ++i) 
+    for (int i = 0x200; i < ramCapacity + 0x200; ++i)
     {
-        std::cout << std::hex << static_cast<uint16_t>(v_ram[i]) << " ";
+        std::cout << std::hex << static_cast<int>(v_ram[i]) << " ";
     }
     std::cout << std::endl;
 }
 
 void CHIP8_Memory::insertDataToRam(uint8_t a_data)
 {
-    v_ram[ramCapacity++] = a_data;
+    v_ram[ramCapacity + 0x200] = a_data;
+    ramCapacity++;
 }
 
 uint16_t CHIP8_Memory::getRAMdata()
@@ -58,6 +59,11 @@ uint16_t CHIP8_Memory::getRAMdata()
 
 void CHIP8_Memory::incrementCounter()
 {
+    if (program_counter > ramCapacity - 2)
+    {
+        return;
+    }
+
     program_counter += 2;
 }
 

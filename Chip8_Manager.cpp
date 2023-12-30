@@ -24,15 +24,15 @@ bool Chip8_Manager::loadROM()
     }
 
     std::vector<uint8_t> romData(std::istreambuf_iterator<char>(file), {});
-    
-    for (const auto& value : romData)
-    {
-        v_memory.insertDataToRam(value);
-    }
 
     if (romData.size() > 4096 - 0x200) //first 512 bytes are reserved
     {
         return false;
+    }
+
+    for (auto const& value : romData)
+    {
+        v_memory.insertDataToRam(value);
     }
 
     return true;
@@ -40,7 +40,7 @@ bool Chip8_Manager::loadROM()
 
 uint8_t Chip8_Manager::fetch()
 {
-    uint8_t data = v_memory.getRAMdata();
+    uint16_t data = v_memory.getRAMdata();
     v_memory.incrementCounter();
     return data;
 }
@@ -71,24 +71,19 @@ void Chip8_Manager::run(std::string a_filename)
         std::cout << "failed loading ROM" << std::endl;
         return;
     }
+
     v_memory.printRAM();
 
-    //std::thread displayThread([this]() 
-    //{
-    //    v_display.displayLoop();
-    //});
-
+    data = fetch();
 
     //while (!v_stop)
     //{
-    //    data = fetch();
+    //    v_display.renderDisplay();
     //    if (!execute(data, decode(data)))
     //    {
     //        return;
     //    }
     //}
-
-    //displayThread.join();
 }
 
 }// namespace chip8_emulator
