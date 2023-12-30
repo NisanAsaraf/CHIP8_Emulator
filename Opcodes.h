@@ -1,6 +1,6 @@
 #ifndef OPCODES_H
 #define OPCODES_H
-#include <iostream>
+
 namespace chip8_emulator
 {
 enum class opcodes
@@ -11,7 +11,7 @@ enum class opcodes
 	ADDREG,			//7XNN
 	SETI,			//ANNN
 	DRAW,			//DXYN
-	UNKNOWN
+	UNKNOWN = 99
 };
 }//namespace chip8_emulator
 #endif

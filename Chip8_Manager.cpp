@@ -52,7 +52,6 @@ opcodes Chip8_Manager::decode(uint8_t a_data)
 
 bool Chip8_Manager::execute(uint8_t a_data, opcodes a_code)
 {
-    std::cout << static_cast<int>(a_code) << "@" << std::endl;
     if (v_instructions.opcodesMap.find(a_code) != v_instructions.opcodesMap.end())
     {
         auto instruction = v_instructions.opcodesMap[a_code];

@@ -19,12 +19,14 @@ chipMemory(mem)
 void Chip8_Instructions::clearScreen(uint16_t a_data)
 {
 	chipDisplay.clearDisplay();
+	std::cout << "screen cleared!" << std::endl;
 }
 
 void Chip8_Instructions::Jump(uint16_t a_data)
 {
-	uint16_t address = a_data & 0x0FFF;
+	uint16_t address = (a_data & 0x0FFF) | 0x0200;
 	chipMemory.jumpToAddress(address);
+	std::cout << "jumped to " << address << std::endl;
 }
 
 void Chip8_Instructions::setRegister(uint16_t a_data)
@@ -33,6 +35,7 @@ void Chip8_Instructions::setRegister(uint16_t a_data)
 	uint8_t register_val = a_data & 0x00FF;
 
 	chipMemory.setRegister(register_num, register_val);
+	std::cout << "register set!" << std::endl;
 }
 
 void Chip8_Instructions::addRegister(uint16_t a_data)
@@ -41,12 +44,14 @@ void Chip8_Instructions::addRegister(uint16_t a_data)
 	uint8_t register_val = a_data & 0x00FF;
 
 	chipMemory.addRegister(register_num, register_val);
+	std::cout << "register added!" << std::endl;
 }
 
 void Chip8_Instructions::setIndexRegister(uint16_t a_data)
 {
 	uint16_t indexReg = a_data & 0x0FFF;
 	chipMemory.setIndexRegister(indexReg);
+	std::cout << "register index set!" << std::endl;
 }
 
 void Chip8_Instructions::draw(uint16_t a_data)
@@ -57,6 +62,7 @@ void Chip8_Instructions::draw(uint16_t a_data)
 	n = a_data & 0x000F;
 
 	chipDisplay.draw(chipMemory.getRegister(x_pos), chipMemory.getRegister(y_pos), n);
+	std::cout << "draw!" << std::endl;
 }
 
 }//namespace chip8_emulator
