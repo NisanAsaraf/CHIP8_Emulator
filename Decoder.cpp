@@ -16,6 +16,7 @@ opcodes Chip8_Decoder::decode(uint16_t a_code)
 		{
 			return opcodes::CLEAR_SCREEN;
 		}
+		return opcodes::UNKNOWN;
 		break;
 	case 1:
 		return opcodes::JUMP;

@@ -38,14 +38,14 @@ void CHIP8_Display::clearDisplay()
 
 void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 {
+	SDL_Rect rect;
+	rect.w = 8; 
+	rect.h = 10 * a_n; 
+	rect.x = 8  * a_x; 
+	rect.y = 8  * a_y; 
+
 	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
-	for (int row = 0; row < a_n; ++row)
-	{
-		for (int col = 0; col < 8; ++col)
-		{
-			SDL_RenderDrawPoint(v_renderer, a_x + col, a_y + row);
-		}
-	}
+	SDL_RenderFillRect(v_renderer, &rect);
 }
 
 bool CHIP8_Display::renderDisplay() 
