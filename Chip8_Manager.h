@@ -20,9 +20,9 @@ public:
 
 private:
 	bool loadROM();
-	uint8_t fetch();
-	opcodes decode(uint8_t a_data);
-	bool execute(uint8_t a_data, opcodes a_code);
+	uint16_t fetch();
+	opcodes decode(uint16_t a_data);
+	bool execute(uint16_t a_data, opcodes a_code);
 
 private:
 	CHIP8_Memory v_memory;

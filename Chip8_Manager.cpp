@@ -38,19 +38,19 @@ bool Chip8_Manager::loadROM()
     return true;
 }
 
-uint8_t Chip8_Manager::fetch()
+uint16_t Chip8_Manager::fetch()
 {
     uint16_t data = v_memory.getRAMdata();
     v_memory.incrementCounter();
     return data;
 }
 
-opcodes Chip8_Manager::decode(uint8_t a_data)
+opcodes Chip8_Manager::decode(uint16_t a_data)
 {
     return v_decoder.decode(a_data);
 }
 
-bool Chip8_Manager::execute(uint8_t a_data, opcodes a_code)
+bool Chip8_Manager::execute(uint16_t a_data, opcodes a_code)
 {
     if (v_instructions.opcodesMap.find(a_code) != v_instructions.opcodesMap.end())
     {
@@ -63,7 +63,7 @@ bool Chip8_Manager::execute(uint8_t a_data, opcodes a_code)
 
 void Chip8_Manager::run(std::string a_filename)
 {
-    uint8_t data;
+    uint16_t data;
     v_filename = a_filename;
 
     if (!loadROM())
@@ -77,10 +77,11 @@ void Chip8_Manager::run(std::string a_filename)
     {
         v_stop = v_display.renderDisplay();
         data = fetch();
-        //std::cout << std::hex << static_cast<int>(data) << ", ";
+        std::cout << std::hex << static_cast<int>(data) << ", ";
+
         if (!execute(data, decode(data)))
         {
-            return;
+            continue;
         }
     }
     v_display.quitDisplay();

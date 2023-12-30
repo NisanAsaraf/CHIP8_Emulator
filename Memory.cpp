@@ -16,7 +16,7 @@ CHIP8_Memory::CHIP8_Memory()
 
 void CHIP8_Memory::jumpToAddress(uint16_t a_address)
 {
-    program_counter = (a_address + 0x200) - 1;
+    program_counter = a_address;
 }
 
 uint8_t CHIP8_Memory::getRegister(uint8_t a_pos)
@@ -59,7 +59,7 @@ uint16_t CHIP8_Memory::getRAMdata()
 
 void CHIP8_Memory::incrementCounter()
 {
-    if (program_counter - 0x200 > ramCapacity - 2)
+    if (program_counter - 0x200 > ramCapacity)
     {
         return;
     }

@@ -24,7 +24,7 @@ void Chip8_Instructions::clearScreen(uint16_t a_data)
 
 void Chip8_Instructions::Jump(uint16_t a_data)
 {
-	uint16_t address = (a_data & 0x0FFF);
+	uint16_t address = (a_data & 0x0FFF) + 0x200;
 	chipMemory.jumpToAddress(address);
 	std::cout << "jumped to " << static_cast<int>(address) << std::endl;
 }
