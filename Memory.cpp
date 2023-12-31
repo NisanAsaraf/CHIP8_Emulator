@@ -62,6 +62,10 @@ size_t CHIP8_Memory::getRAMcapacity()
 {
     return ramCapacity;
 }
+uint16_t CHIP8_Memory::getProgramCounter()
+{
+    return program_counter;
+}
 
 std::array<uint8_t, 4096>& CHIP8_Memory::getRefRAM()
 {
@@ -120,6 +124,37 @@ void CHIP8_Memory::addRegister(uint8_t a_index, uint8_t a_val)
 void CHIP8_Memory::setIndexRegister(uint16_t a_data)
 {
     index_register = a_data;
+}
+
+void CHIP8_Memory::shiftStackRight()
+{
+    for (int i = 15; i >= 0; --i)
+    {
+        v_stack[i] = v_stack[i - 1];
+    }
+    v_stack[0] = 0;
+}
+
+void CHIP8_Memory::shiftStackLeft()
+{
+    for (int i = 0; i < 16; ++i)
+    {
+        v_stack[i] = v_stack[i + 1];
+    }
+    v_stack[15] = 0;
+}
+
+void CHIP8_Memory::pushStack(uint16_t a_data)
+{
+    shiftStackRight();
+    v_stack[0] = a_data;
+}
+
+uint16_t CHIP8_Memory::popStack()
+{
+    uint16_t data = v_stack[0];
+    shiftStackLeft();
+    return data;
 }
 
 }//namespace chip8_emulator

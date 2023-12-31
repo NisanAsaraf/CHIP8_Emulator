@@ -20,11 +20,16 @@ public:
     void insertDataToRam(uint8_t a_data);
     void incrementCounter();
     uint16_t& getIndexRegister();
+    uint16_t getProgramCounter();
     void setCapacity(size_t a_capacity);
     void setRegister(uint8_t a_index, uint8_t a_val);
     void addRegister(uint8_t a_index, uint8_t a_val);
     void setIndexRegister(uint16_t a_data);
     void printRAM();
+    void shiftStackRight();
+    void shiftStackLeft();
+    void pushStack(uint16_t a_data);
+    uint16_t popStack();
 
 private:
     std::array<uint8_t, 4096> v_ram;

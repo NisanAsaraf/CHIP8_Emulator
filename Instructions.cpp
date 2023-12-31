@@ -10,10 +10,12 @@ chipMemory(mem)
 {
 	opcodesMap[opcodes::CLEAR_SCREEN] = &Chip8_Instructions::clearScreen;
 	opcodesMap[opcodes::JUMP] = &Chip8_Instructions::Jump;
+	opcodesMap[opcodes::CALL] = &Chip8_Instructions::Call;
 	opcodesMap[opcodes::SETREG] = &Chip8_Instructions::setRegister;
 	opcodesMap[opcodes::ADDREG] = &Chip8_Instructions::addRegister;
 	opcodesMap[opcodes::SETI] = &Chip8_Instructions::setIndexRegister;
 	opcodesMap[opcodes::DRAW] = &Chip8_Instructions::draw;
+	opcodesMap[opcodes::RETURN] = &Chip8_Instructions::Return;
 }
 
 void Chip8_Instructions::clearScreen(uint16_t a_data)
@@ -27,6 +29,19 @@ void Chip8_Instructions::Jump(uint16_t a_data)
 	uint16_t address = (a_data & 0x0FFF);
 	chipMemory.jumpToAddress(address);
 	std::cout << "jumped to " << std::hex << static_cast<int>(address) << std::endl;
+}
+
+void Chip8_Instructions::Call(uint16_t a_data)
+{
+	uint16_t address = (a_data & 0x0FFF);
+	chipMemory.pushStack(chipMemory.getProgramCounter());
+	chipMemory.jumpToAddress(address);
+	std::cout << "jumped to " << std::hex << static_cast<int>(address) << std::endl;
+}
+
+void Chip8_Instructions::Return(uint16_t a_data)
+{
+	chipMemory.jumpToAddress(chipMemory.popStack());
 }
 
 void Chip8_Instructions::setRegister(uint16_t a_data)
