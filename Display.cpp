@@ -39,7 +39,7 @@ v_index_register{ a_index_register }
 
 void CHIP8_Display::createGrid()
 {
-	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(v_renderer, 0, 0, 0, 255);
 	for (int i = 1; i < SCREEN_WIDTH; ++i)
 	{
 		int xPos = v_pixelSize * i;
@@ -97,6 +97,7 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 bool CHIP8_Display::renderDisplay() 
 {
 	SDL_RenderPresent(v_renderer);
+	createGrid();
 	SDL_Event e;
 	while (SDL_PollEvent(&e) != 0) 
 	{
