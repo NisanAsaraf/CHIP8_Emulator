@@ -258,22 +258,25 @@ void Chip8_Instructions::GetDelay(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 
-	chipMemory.setRegister(X, );
+	chipMemory.setRegister(X, chipMemory.getDelay());
 }
 
 void Chip8_Instructions::GetKey(uint16_t a_data)
 {
-
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
 }
 
 void Chip8_Instructions::SetDelay(uint16_t a_data)
 {
-
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	chipMemory.setDelay(chipMemory.getRegister(X));
 }
 
 void Chip8_Instructions::SetSound(uint16_t a_data)
 {
-
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	chipMemory.setSound(chipMemory.getRegister(X));
 }
 
 void Chip8_Instructions::setRegister(uint16_t a_data)
