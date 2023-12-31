@@ -1,7 +1,7 @@
 #ifndef CHIP8_DISPLAY_H
 #define CHIP8_DISPLAY_H
 #include <SDL.h>
-
+#include <Array>
 namespace chip8_emulator
 {
 
@@ -13,9 +13,19 @@ public:
 	void draw(uint8_t a_x, uint8_t a_y, uint8_t a_n);
 	bool renderDisplay();
 	void quitDisplay();
+	void createGrid();
+	void drawPixels(uint8_t a_x, uint8_t a_y, uint8_t a_n);
+	void drawPixels();
 private:
-	SDL_Window* v_window = NULL;
-	SDL_Renderer* v_renderer = NULL;
+	SDL_Window* v_window = nullptr;
+	SDL_Renderer* v_renderer = nullptr;
+
+	static constexpr uint8_t v_pixelSize = 8;
+	static constexpr uint8_t SCREEN_WIDTH = 64;
+	static constexpr uint8_t SCREEN_HEIGHT = 32;
+	SDL_Rect v_pixel;
+
+	std::array<std::array<bool, SCREEN_WIDTH>, SCREEN_HEIGHT> v_pixelVector;
 	bool v_stop;
 };
 

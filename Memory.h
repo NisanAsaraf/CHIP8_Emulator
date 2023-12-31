@@ -15,6 +15,7 @@ public:
     uint8_t getRegister(uint8_t a_pos);
     uint16_t getRAMdata();
     size_t getRAMcapacity();
+    void initializeFont();
     void insertDataToRam(uint8_t a_data);
     void incrementCounter();
     void setCapacity(size_t a_capacity);
@@ -31,7 +32,7 @@ private:
     uint16_t index_register; 
     uint8_t delay_timer; 
     uint8_t sound_timer; 
-
+    
     static constexpr uint16_t STACK_START = 0xE00;      // Start address of the stack
     static constexpr uint16_t STACK_END = 0xFFF;        // End address of the stack
     static constexpr uint16_t DISPLAY_START = 0xF00;    // Start address of the display memory
