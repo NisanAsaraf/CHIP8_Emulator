@@ -3,11 +3,12 @@
 namespace chip8_emulator
 {
 
-CHIP8_Display::CHIP8_Display()
+CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram)
 :
 v_pixelVector{},
 v_stop{},
-v_pixel{ v_pixelSize ,v_pixelSize }
+v_pixel{ v_pixelSize ,v_pixelSize },
+v_ram{a_ram}
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -49,25 +50,6 @@ void CHIP8_Display::createGrid()
 	SDL_RenderPresent(v_renderer);
 }
 
-void CHIP8_Display::drawPixels() 
-{
-	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
-	for (int i = 0; i < v_pixelVector.size(); ++i) 
-	{
-		if (v_pixelVector[i] == 1)
-		{
-			int xPos = (i % SCREEN_WIDTH) * v_pixelSize;
-			int yPos = (i / SCREEN_WIDTH) * v_pixelSize;
-
-			// Draw a filled rectangle representing a pixel
-			SDL_Rect pixelRect = { xPos, yPos, v_pixelSize, v_pixelSize };
-			SDL_RenderFillRect(v_renderer, &pixelRect);
-		}
-	}
-
-	SDL_RenderPresent(v_renderer);
-}
-
 void CHIP8_Display::clearDisplay()
 {
 	SDL_SetRenderDrawColor(v_renderer, 0, 0, 0, 255);
@@ -83,15 +65,9 @@ void CHIP8_Display::drawPixels(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 }
 
 void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
-{
-	SDL_Rect rect;
-	rect.w = 8; 
-	rect.h = 10 * a_n; 
-	rect.x = 8  * a_x; 
-	rect.y = 8  * a_y; 
-	
+{	
 	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(v_renderer, &rect);
+	SDL_RenderFillRect(v_renderer, &v_pixel);
 }
 
 bool CHIP8_Display::renderDisplay() 
