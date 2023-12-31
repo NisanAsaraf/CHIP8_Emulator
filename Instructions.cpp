@@ -63,7 +63,7 @@ void Chip8_Instructions::draw(uint16_t a_data)
 	x_pos = chipMemory.getRegister(x_pos);
 	y_pos = chipMemory.getRegister(y_pos);
 
-	std::cout << "draw!" << static_cast<int>(x_pos) << "," << static_cast<int>(y_pos) << std::endl;
+	std::cout << "draw! " << static_cast<int>(x_pos) << "," << static_cast<int>(y_pos) << std::endl;
 	chipDisplay.draw(x_pos, y_pos, n);
 }
 

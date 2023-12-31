@@ -64,7 +64,7 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 {	
 	for (uint8_t i = 0; i < a_n; ++i)
 	{
-		for (uint8_t j = 0; j < 7; ++j)
+		for (uint8_t j = 0; j < 8; ++j)
 		{
 			int x = (a_x + j) % SCREEN_WIDTH;
 			int y = (a_y + i) % SCREEN_HEIGHT;
