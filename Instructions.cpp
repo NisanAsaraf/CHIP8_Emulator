@@ -11,6 +11,10 @@ chipMemory(mem)
 	opcodesMap[opcodes::CLEAR_SCREEN] = &Chip8_Instructions::clearScreen;
 	opcodesMap[opcodes::JUMP] = &Chip8_Instructions::Jump;
 	opcodesMap[opcodes::CALL] = &Chip8_Instructions::Call;
+	opcodesMap[opcodes::SKIPX] = &Chip8_Instructions::SkipX;
+	opcodesMap[opcodes::SKIPNX] = &Chip8_Instructions::SkipNX;
+	opcodesMap[opcodes::SKIPXY] = &Chip8_Instructions::SkipXY;
+	opcodesMap[opcodes::SKIPNXY] = &Chip8_Instructions::SkipNXY;
 	opcodesMap[opcodes::SETREG] = &Chip8_Instructions::setRegister;
 	opcodesMap[opcodes::ADDREG] = &Chip8_Instructions::addRegister;
 	opcodesMap[opcodes::SETI] = &Chip8_Instructions::setIndexRegister;
@@ -42,6 +46,46 @@ void Chip8_Instructions::Call(uint16_t a_data)
 void Chip8_Instructions::Return(uint16_t a_data)
 {
 	chipMemory.jumpToAddress(chipMemory.popStack());
+}
+
+void Chip8_Instructions::SkipX(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t data = a_data & 0x00FF;
+	if (chipMemory.getRegister(X) == data)
+	{
+		chipMemory.incrementCounter();
+	}
+}
+
+void Chip8_Instructions::SkipNX(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t data = a_data & 0x00FF;
+	if (chipMemory.getRegister(X) != data)
+	{
+		chipMemory.incrementCounter();
+	}
+}
+
+void Chip8_Instructions::SkipXY(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t Y = (a_data & 0x00F0) >> 4;
+	if (chipMemory.getRegister(X) == chipMemory.getRegister(Y))
+	{
+		chipMemory.incrementCounter();
+	}
+}
+
+void Chip8_Instructions::SkipNXY(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t Y = (a_data & 0x00F0) >> 4;
+	if (chipMemory.getRegister(X) == chipMemory.getRegister(Y))
+	{
+		chipMemory.incrementCounter();
+	}
 }
 
 void Chip8_Instructions::setRegister(uint16_t a_data)

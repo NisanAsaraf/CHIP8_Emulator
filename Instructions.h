@@ -18,11 +18,15 @@ public:
 	void clearScreen(uint16_t a_data);
 	void Jump(uint16_t a_data);
 	void Call(uint16_t a_data);
-	void Return(uint16_t a_data);
+	void SkipX(uint16_t a_data);
+	void SkipNX(uint16_t a_data);
+	void SkipXY(uint16_t a_data);
+	void SkipNXY(uint16_t a_data);
 	void setRegister(uint16_t a_data);
 	void addRegister(uint16_t a_data);
 	void setIndexRegister(uint16_t a_data);
 	void draw(uint16_t a_data);
+	void Return(uint16_t a_data);
 private:
 	CHIP8_Display& chipDisplay;
 	CHIP8_Memory& chipMemory;
