@@ -50,7 +50,6 @@ public:
 	void SetIsprite(uint16_t a_data);
 	void SetBCD(uint16_t a_data);
 	void RegDump(uint16_t a_data);
-	void RegDump(uint16_t a_data);
 	void RegLoad(uint16_t a_data);
 
 	void draw(uint16_t a_data);

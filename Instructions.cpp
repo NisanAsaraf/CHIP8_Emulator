@@ -37,6 +37,12 @@ chipMemory(mem)
 	opcodesMap[opcodes::SETDELAY] = &Chip8_Instructions::SetDelay;
 	opcodesMap[opcodes::SETSOUND] = &Chip8_Instructions::SetSound;
 
+	opcodesMap[opcodes::ADDXTI] = &Chip8_Instructions::AddXTI;
+	opcodesMap[opcodes::SETITSPRITE] = &Chip8_Instructions::SetIsprite;
+	opcodesMap[opcodes::BCD] = &Chip8_Instructions::SetBCD;
+	opcodesMap[opcodes::REGDUMP] = &Chip8_Instructions::RegDump;
+	opcodesMap[opcodes::REGLOAD] = &Chip8_Instructions::RegLoad;
+
 	opcodesMap[opcodes::SETREG] = &Chip8_Instructions::setRegister;
 	opcodesMap[opcodes::ADDREG] = &Chip8_Instructions::addRegister;
 	opcodesMap[opcodes::SETI] = &Chip8_Instructions::setIndexRegister;
