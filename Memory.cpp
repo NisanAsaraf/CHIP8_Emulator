@@ -52,7 +52,7 @@ uint8_t CHIP8_Memory::getRegister(uint8_t a_pos)
     return v_registers[a_pos];
 }
 
-uint16_t CHIP8_Memory::getIndexRegister()
+uint16_t& CHIP8_Memory::getIndexRegister()
 {
     return index_register;
 }

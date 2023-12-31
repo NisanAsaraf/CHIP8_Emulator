@@ -10,7 +10,6 @@ v_decoder{},
 v_instructions{ v_display, v_memory },
 v_stop{ false }
 {
-   
 }
 
 bool Chip8_Manager::loadROM()

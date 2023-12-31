@@ -3,7 +3,7 @@
 namespace chip8_emulator
 {
 
-CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t a_index_register)
+CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t& a_index_register)
 :
 v_pixelVector{},
 v_stop{},
