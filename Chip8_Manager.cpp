@@ -72,17 +72,14 @@ void Chip8_Manager::run(std::string a_filename)
     }
     v_memory.printRAM();
 
-    //v_display.createGrid();
-
     while (!v_stop)
     {
         v_stop = v_display.renderDisplay();
         data = fetch();
-        //std::cout << std::hex << static_cast<int>(data) << ", ";
 
         if (!execute(data, decode(data)))
         {
-            continue;
+            break;
         }
     }
     v_display.quitDisplay();
