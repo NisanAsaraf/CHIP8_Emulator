@@ -130,6 +130,21 @@ uint16_t CHIP8_Memory::getRAMdata()
     return data;
 }
 
+void CHIP8_Memory::setRAMdata(uint16_t a_index, uint8_t a_data)
+{
+    if (a_index > 4096)
+    {
+        return;
+    }
+
+    v_ram[a_index] = a_data;
+}
+
+uint8_t CHIP8_Memory::getRAMnibble(uint16_t a_address)
+{
+    return v_ram[a_address];
+}
+
 void CHIP8_Memory::incrementCounter()
 {
     if (program_counter - 0x200 > ramCapacity)

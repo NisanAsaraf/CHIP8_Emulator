@@ -46,6 +46,13 @@ public:
 	void SetDelay(uint16_t a_data);
 	void SetSound(uint16_t a_data);
 
+	void AddXTI(uint16_t a_data);
+	void SetIsprite(uint16_t a_data);
+	void SetBCD(uint16_t a_data);
+	void RegDump(uint16_t a_data);
+	void RegDump(uint16_t a_data);
+	void RegLoad(uint16_t a_data);
+
 	void draw(uint16_t a_data);
 	void Return(uint16_t a_data);
 private:

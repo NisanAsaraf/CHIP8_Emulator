@@ -14,10 +14,12 @@ public:
     void jumpToAddress(uint16_t a_address);
     uint8_t getRegister(uint8_t a_pos);
     uint16_t getRAMdata();
+    uint8_t getRAMnibble(uint16_t a_address);
     size_t getRAMcapacity();
     void initializeFont();
     std::array<uint8_t, 4096>& getRefRAM();
     void insertDataToRam(uint8_t a_data);
+    void setRAMdata(uint16_t a_index, uint8_t a_data);
     void incrementCounter();
     void decrementCounter();
     uint16_t& getIndexRegister();

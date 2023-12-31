@@ -293,6 +293,58 @@ void Chip8_Instructions::SetSound(uint16_t a_data)
 	chipMemory.setSound(chipMemory.getRegister(X));
 }
 
+void Chip8_Instructions::AddXTI(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t VX = chipMemory.getRegister(X);
+	chipMemory.setIndexRegister(chipMemory.getIndexRegister() + VX);
+}
+
+void Chip8_Instructions::SetIsprite(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t VX = chipMemory.getRegister(X);
+	chipMemory.setIndexRegister(chipMemory.getRAMnibble((VX & 0x000F) * 5));
+}
+
+void Chip8_Instructions::SetBCD(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t VX = chipMemory.getRegister(X);
+	uint8_t I0, I1, I2;
+	uint16_t index = chipMemory.getIndexRegister();
+
+	I0 = VX % 10;
+	VX /= 10;
+	I1 = VX % 10;
+	VX /= 10;
+	I2 = VX % 10;
+
+	chipMemory.setRAMdata(index, I0);
+	chipMemory.setRAMdata(index + 1, I1);
+	chipMemory.setRAMdata(index + 2, I2);
+}
+
+void Chip8_Instructions::RegDump(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint16_t index = chipMemory.getIndexRegister();
+	for (uint8_t i = 0; i <= X; i++)
+	{
+		chipMemory.setRAMdata(index + i, chipMemory.getRegister(i));
+	}
+}
+
+void Chip8_Instructions::RegLoad(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint16_t index = chipMemory.getIndexRegister();
+	for (uint8_t i = 0; i <= X; i++)
+	{
+		chipMemory.setRegister(i, chipMemory.getRAMnibble(index + i));
+	}
+}
+
 void Chip8_Instructions::setRegister(uint16_t a_data)
 {
 	uint8_t register_num = (a_data & 0x0F00) >> 8;
