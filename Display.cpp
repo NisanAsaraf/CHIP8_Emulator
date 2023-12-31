@@ -7,10 +7,13 @@ CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t& a_index
 :
 v_pixelArray{},
 v_stop{},
-v_pixel{ v_pixelSize ,v_pixelSize },
+v_pixel{},
 v_ram{a_ram},
 v_index_register{ a_index_register }
 {
+	v_pixel.w = v_pixelSize;
+	v_pixel.h = v_pixelSize;
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		return;
@@ -59,8 +62,6 @@ void CHIP8_Display::clearDisplay()
 
 void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 {	
-	//std::cout << "INDEX :" << static_cast<int>(v_index_register);
-
 	for (uint8_t i = 0; i < a_n; ++i)
 	{
 		for (uint8_t j = 0; j < 7; ++j)
@@ -95,7 +96,6 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 
 bool CHIP8_Display::renderDisplay() 
 {
-	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
 	SDL_RenderPresent(v_renderer);
 	SDL_Event e;
 	while (SDL_PollEvent(&e) != 0) 
