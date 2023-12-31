@@ -9,7 +9,7 @@ v_pixelArray{},
 v_stop{},
 v_pixel{ v_pixelSize ,v_pixelSize },
 v_ram{a_ram},
-v_index_register{ v_index_register }
+v_index_register{ a_index_register }
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -61,14 +61,31 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 {	
 	for (uint8_t i = 0; i < a_n; ++i)
 	{
-		for (uint8_t j = 7; j >= 0; --j)
+		for (uint8_t j = 0; j < 7; ++j)
 		{
-			v_pixelArray[a_x + j][a_y + i] = !(v_ram[v_index_register + i] << j);
+			v_pixelArray[ (a_x + j) % (SCREEN_WIDTH - 1) ][ (a_y + i) % (SCREEN_HEIGHT - 1)] ^= (v_ram[v_index_register + i] << (7 - j));
 		}
 	}
 
-	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(v_renderer, &v_pixel);
+	for (int i = 0; i < SCREEN_WIDTH; ++i) 
+	{
+		v_pixel.y = a_y + i;
+
+		for (int j = 0; j < SCREEN_HEIGHT; ++j) 
+		{
+			v_pixel.x = a_x + j;
+
+			if (v_pixelArray[i][j]) 
+			{
+				SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
+			}
+			else 
+			{
+				SDL_SetRenderDrawColor(v_renderer, 0, 0, 0, 255);
+			}
+			SDL_RenderFillRect(v_renderer, &v_pixel);
+		}
+	}
 }
 
 bool CHIP8_Display::renderDisplay() 

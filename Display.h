@@ -27,7 +27,7 @@ private:
 	std::array<uint8_t, 4096>& v_ram;
 	uint16_t& v_index_register;
 
-	std::array<std::array<bool, SCREEN_WIDTH>, SCREEN_HEIGHT> v_pixelArray;
+	std::array<std::array<bool, SCREEN_HEIGHT>, SCREEN_WIDTH> v_pixelArray;
 	bool v_stop;
 };
 
