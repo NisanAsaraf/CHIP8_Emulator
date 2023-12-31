@@ -19,6 +19,7 @@ public:
     std::array<uint8_t, 4096>& getRefRAM();
     void insertDataToRam(uint8_t a_data);
     void incrementCounter();
+    void decrementCounter();
     uint16_t& getIndexRegister();
     uint16_t getProgramCounter();
     void setCapacity(size_t a_capacity);

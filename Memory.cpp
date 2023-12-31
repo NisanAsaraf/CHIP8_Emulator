@@ -140,6 +140,16 @@ void CHIP8_Memory::incrementCounter()
     program_counter += 2;
 }
 
+void CHIP8_Memory::decrementCounter()
+{
+    if (program_counter <= 0x200)
+    {
+        return;
+    }
+
+    program_counter -= 2;
+}
+
 void CHIP8_Memory::setRegister(uint8_t a_index, uint8_t a_val)
 {
     v_registers[a_index] = a_val;

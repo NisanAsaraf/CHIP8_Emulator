@@ -4,10 +4,10 @@
 #include <unordered_map>
 #include <functional>
 #include <random>
+#include <conio.h>
 #include "Opcodes.h"
 #include "Display.h"
 #include "Memory.h"
-
 namespace chip8_emulator
 {
 class Chip8_Instructions

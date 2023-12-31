@@ -1,5 +1,6 @@
 #include "Instructions.h"
 
+
 namespace chip8_emulator
 {
 
@@ -30,6 +31,11 @@ chipMemory(mem)
 
 	opcodesMap[opcodes::KEYX] = &Chip8_Instructions::KeyX;
 	opcodesMap[opcodes::KEYNX] = &Chip8_Instructions::KeyNX;
+
+	opcodesMap[opcodes::GETDELAY] = &Chip8_Instructions::GetDelay;
+	opcodesMap[opcodes::GETKEY] = &Chip8_Instructions::GetKey;
+	opcodesMap[opcodes::SETDELAY] = &Chip8_Instructions::SetDelay;
+	opcodesMap[opcodes::SETSOUND] = &Chip8_Instructions::SetSound;
 
 	opcodesMap[opcodes::SETREG] = &Chip8_Instructions::setRegister;
 	opcodesMap[opcodes::ADDREG] = &Chip8_Instructions::addRegister;
@@ -264,7 +270,15 @@ void Chip8_Instructions::GetDelay(uint16_t a_data)
 void Chip8_Instructions::GetKey(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
-	//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO//TODO
+
+	if (_kbhit()) 
+	{ 
+		chipMemory.setRegister(X , static_cast<uint8_t>(_getch()));
+	}
+	else
+	{
+		chipMemory.decrementCounter();
+	}
 }
 
 void Chip8_Instructions::SetDelay(uint16_t a_data)

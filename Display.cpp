@@ -105,6 +105,7 @@ bool CHIP8_Display::renderDisplay()
 		{
 			return true;
 		}
+
 	}
 	return false;
 }

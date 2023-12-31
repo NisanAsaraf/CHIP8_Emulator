@@ -33,7 +33,7 @@ enum class opcodes : uint8_t
 	KEYX = 14,			//EX9E
 	KEYNX = 15,			//EXA1
 
-	DELAY = 16,			//FX07
+	GETDELAY = 16,			//FX07
 	GETKEY = 17,		//FX0A
 	SETDELAY = 18,		//FX15
 	SETSOUND = 19,		//FX18
