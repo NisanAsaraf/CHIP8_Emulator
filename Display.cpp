@@ -3,12 +3,13 @@
 namespace chip8_emulator
 {
 
-CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram)
+CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t a_index_register)
 :
 v_pixelVector{},
 v_stop{},
 v_pixel{ v_pixelSize ,v_pixelSize },
-v_ram{a_ram}
+v_ram{a_ram},
+v_index_register{ v_index_register }
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -58,6 +59,7 @@ void CHIP8_Display::clearDisplay()
 
 void CHIP8_Display::drawPixels(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 {
+
 	for (uint8_t i = 0; i < a_n; ++i)
 	{
 		v_pixelVector[a_x][a_y + i] = !v_pixelVector[a_x][a_y + i];	

@@ -16,13 +16,16 @@ public:
     uint16_t getRAMdata();
     size_t getRAMcapacity();
     void initializeFont();
+    std::array<uint8_t, 4096>& getRefRAM();
     void insertDataToRam(uint8_t a_data);
     void incrementCounter();
+    uint16_t getIndexRegister();
     void setCapacity(size_t a_capacity);
     void setRegister(uint8_t a_index, uint8_t a_val);
     void addRegister(uint8_t a_index, uint8_t a_val);
     void setIndexRegister(uint16_t a_data);
     void printRAM();
+
 private:
     std::array<uint8_t, 4096> v_ram;
     size_t ramCapacity;

@@ -52,9 +52,19 @@ uint8_t CHIP8_Memory::getRegister(uint8_t a_pos)
     return v_registers[a_pos];
 }
 
+uint16_t CHIP8_Memory::getIndexRegister()
+{
+    return index_register;
+}
+
 size_t CHIP8_Memory::getRAMcapacity()
 {
     return ramCapacity;
+}
+
+std::array<uint8_t, 4096>& CHIP8_Memory::getRefRAM()
+{
+    return v_ram;
 }
 
 void CHIP8_Memory::setCapacity(size_t a_capacity)
