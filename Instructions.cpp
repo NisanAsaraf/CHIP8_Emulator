@@ -88,6 +88,46 @@ void Chip8_Instructions::SkipNXY(uint16_t a_data)
 	}
 }
 
+void Chip8_Instructions::Chip8_Instructions::SetXY(uint16_t a_data)
+{
+
+}
+
+void SetXOY(uint16_t a_data)
+{
+
+}
+
+void Chip8_Instructions::SetXAY(uint16_t a_data)
+{
+
+}
+
+void Chip8_Instructions::AddYtX(uint16_t a_data)
+{
+
+}
+
+void Chip8_Instructions::AddMYtX(uint16_t a_data)
+{
+
+}
+
+void Chip8_Instructions::BitOpR(uint16_t a_data)
+{
+
+}
+
+void Chip8_Instructions::SetXYMX(uint16_t a_data)
+{
+
+}
+
+void Chip8_Instructions::BITOpL(uint16_t a_data)
+{
+
+}
+
 void Chip8_Instructions::setRegister(uint16_t a_data)
 {
 	uint8_t register_num = (a_data & 0x0F00) >> 8;

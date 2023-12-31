@@ -22,6 +22,16 @@ public:
 	void SkipNX(uint16_t a_data);
 	void SkipXY(uint16_t a_data);
 	void SkipNXY(uint16_t a_data);
+
+	void SetXY(uint16_t a_data);
+	void SetXOY(uint16_t a_data);
+	void SetXAY(uint16_t a_data);
+	void AddYtX(uint16_t a_data);
+	void AddMYtX(uint16_t a_data);
+	void BitOpR(uint16_t a_data);
+	void SetXYMX(uint16_t a_data);
+	void BITOpL(uint16_t a_data);
+
 	void setRegister(uint16_t a_data);
 	void addRegister(uint16_t a_data);
 	void setIndexRegister(uint16_t a_data);

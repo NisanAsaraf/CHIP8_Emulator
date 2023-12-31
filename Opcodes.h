@@ -14,6 +14,16 @@ enum class opcodes : uint8_t
 	SETREG = 6,			//6XNN
 	ADDREG = 7,			//7XNN
 
+	SETXY = 80,
+	SETXOY = 81,
+	SETXAY = 82,
+	SETXRY = 83,
+	ADDYTX = 84,
+	ADDMYTX = 85,
+	BITOPR = 86,
+	SETXYMX = 87,
+
+	BITOPL = 88,
 	SKIPNXY = 9,		//9XY0
 	SETI = 10,			//ANNN
 	DRAW = 13,			//DXYN
