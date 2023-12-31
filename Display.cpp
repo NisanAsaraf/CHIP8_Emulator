@@ -66,8 +66,8 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	{
 		for (uint8_t j = 0; j < 8; ++j)
 		{
-			int x = (a_x + j) % SCREEN_WIDTH;
-			int y = (a_y + i) % SCREEN_HEIGHT;
+			int x = (a_x + j - 6) % SCREEN_WIDTH;	// the 6 is to offset to center
+			int y = (a_y + i - 1) % SCREEN_HEIGHT;	// the 1 is to offset the center
 
 			bool pixel = v_ram[v_index_register + i] & (0x80 >> j);
 			v_pixelArray[x][y] ^= pixel;
