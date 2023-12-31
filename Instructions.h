@@ -26,6 +26,7 @@ public:
 	void SetXY(uint16_t a_data);
 	void SetXOY(uint16_t a_data);
 	void SetXAY(uint16_t a_data);
+	void SetXRY(uint16_t a_data);
 	void AddYtX(uint16_t a_data);
 	void AddMYtX(uint16_t a_data);
 	void BitOpR(uint16_t a_data);

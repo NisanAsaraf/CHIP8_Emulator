@@ -113,7 +113,6 @@ void CHIP8_Memory::incrementCounter()
 void CHIP8_Memory::setRegister(uint8_t a_index, uint8_t a_val)
 {
     v_registers[a_index] = a_val;
-    v_registers[15] = 0;
 }
 
 void CHIP8_Memory::addRegister(uint8_t a_index, uint8_t a_val)
