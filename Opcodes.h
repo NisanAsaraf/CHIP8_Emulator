@@ -26,7 +26,17 @@ enum class opcodes : uint8_t
 
 	SKIPNXY = 9,		//9XY0
 	SETI = 10,			//ANNN
+	JUMPZ = 11,			//BNNN
+	RANDX = 12,			//CXNN
 	DRAW = 13,			//DXYN
+
+	KEYX = 14,			//EX9E
+	KEYNX = 15,			//EXA1
+
+	DELAY = 16,			//FX07
+	GETKEY = 17,		//FX0A
+	SETDELAY = 18,		//FX15
+	SETSOUND = 19,		//FX18
 
 	RETURN,				//00EE
 	UNKNOWN = 99

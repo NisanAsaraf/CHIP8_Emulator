@@ -98,6 +98,26 @@ void CHIP8_Memory::shiftRegisterLeft(uint8_t a_x)
     v_registers[a_x] <<= 1;
 }
 
+uint8_t CHIP8_Memory::getDelay()
+{
+    return delay_timer;
+}
+
+void CHIP8_Memory::setDelay(uint8_t a_data) 
+{
+    delay_timer = a_data;
+}
+
+uint8_t CHIP8_Memory::getSound()
+{
+    return sound_timer;
+}
+
+void CHIP8_Memory::setSound(uint8_t a_data) 
+{
+    sound_timer = a_data;
+}
+
 void CHIP8_Memory::insertDataToRam(uint8_t a_data)
 {
     v_ram[ramCapacity + 0x200] = a_data;

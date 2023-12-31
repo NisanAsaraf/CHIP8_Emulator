@@ -33,6 +33,11 @@ public:
     void pushStack(uint16_t a_data);
     uint16_t popStack();
 
+    uint8_t getDelay();
+    void setDelay(uint8_t a_data);
+    uint8_t getSound();
+    void setSound(uint8_t a_data);
+
 private:
     std::array<uint8_t, 4096> v_ram;
     size_t ramCapacity;

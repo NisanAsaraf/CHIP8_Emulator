@@ -1,11 +1,12 @@
 #ifndef INSTRUCTIONS_H
 #define INSTRUCTIONS_H
 #include <cstdint>
+#include <unordered_map>
+#include <functional>
+#include <random>
 #include "Opcodes.h"
 #include "Display.h"
 #include "Memory.h"
-#include <unordered_map>
-#include <functional>
 
 namespace chip8_emulator
 {
@@ -32,10 +33,19 @@ public:
 	void BitOpR(uint16_t a_data);
 	void SetXYMX(uint16_t a_data);
 	void BITOpL(uint16_t a_data);
-
+	void JumpZ(uint16_t a_data);
 	void setRegister(uint16_t a_data);
 	void addRegister(uint16_t a_data);
 	void setIndexRegister(uint16_t a_data);
+	void RandX(uint16_t a_data);
+	void KeyX(uint16_t a_data);
+	void KeyNX(uint16_t a_data);
+
+	void GetDelay(uint16_t a_data);
+	void GetKey(uint16_t a_data);
+	void SetDelay(uint16_t a_data);
+	void SetSound(uint16_t a_data);
+
 	void draw(uint16_t a_data);
 	void Return(uint16_t a_data);
 private:
