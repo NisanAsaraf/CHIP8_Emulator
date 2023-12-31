@@ -6,6 +6,7 @@ CHIP8_Memory::CHIP8_Memory()
 {
     v_ram.fill(0);
     ramCapacity = 0;
+    initializeFont();
     v_registers.fill(0);
     v_stack.fill(0);
     program_counter = 0x200; // Start CHIP-8 programs typically at address 0x200

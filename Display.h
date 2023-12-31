@@ -2,6 +2,8 @@
 #define CHIP8_DISPLAY_H
 #include <SDL.h>
 #include <Array>
+#include <iostream>
+
 namespace chip8_emulator
 {
 

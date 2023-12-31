@@ -59,23 +59,28 @@ void CHIP8_Display::clearDisplay()
 
 void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 {	
+	//std::cout << "INDEX :" << static_cast<int>(v_index_register);
+
 	for (uint8_t i = 0; i < a_n; ++i)
 	{
 		for (uint8_t j = 0; j < 7; ++j)
 		{
-			v_pixelArray[ (a_x + j) % (SCREEN_WIDTH - 1) ][ (a_y + i) % (SCREEN_HEIGHT - 1)] ^= (v_ram[v_index_register + i] << (7 - j));
+			int x = (a_x + j) % SCREEN_WIDTH;
+			int y = (a_y + i) % SCREEN_HEIGHT;
+
+			bool pixel = v_ram[v_index_register + i] & (0x80 >> j);
+			v_pixelArray[x][y] ^= pixel;
 		}
 	}
 
-	for (int i = 0; i < SCREEN_WIDTH; ++i) 
+	for (int x = 0; x < SCREEN_WIDTH; ++x) 
 	{
-		v_pixel.y = a_y + i;
-
-		for (int j = 0; j < SCREEN_HEIGHT; ++j) 
+		for (int y = 0; y < SCREEN_HEIGHT; ++y) 
 		{
-			v_pixel.x = a_x + j;
+			v_pixel.x = a_x + x * v_pixelSize; 
+			v_pixel.y = a_y + y * v_pixelSize;
 
-			if (v_pixelArray[i][j]) 
+			if (v_pixelArray[x][y]) 
 			{
 				SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
 			}
