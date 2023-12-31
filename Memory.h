@@ -26,6 +26,8 @@ public:
     void addRegister(uint8_t a_index, uint8_t a_val);
     void setIndexRegister(uint16_t a_data);
     void printRAM();
+    void shiftRegisterRight(uint8_t a_x);
+    void shiftRegisterLeft(uint8_t a_x);
     void shiftStackRight();
     void shiftStackLeft();
     void pushStack(uint16_t a_data);

@@ -15,6 +15,17 @@ chipMemory(mem)
 	opcodesMap[opcodes::SKIPNX] = &Chip8_Instructions::SkipNX;
 	opcodesMap[opcodes::SKIPXY] = &Chip8_Instructions::SkipXY;
 	opcodesMap[opcodes::SKIPNXY] = &Chip8_Instructions::SkipNXY;
+
+	opcodesMap[opcodes::SETXY] = &Chip8_Instructions::SetXY;
+	opcodesMap[opcodes::SETXOY] = &Chip8_Instructions::SetXOY;
+	opcodesMap[opcodes::SETXAY] = &Chip8_Instructions::SetXAY;
+	opcodesMap[opcodes::SETXRY] = &Chip8_Instructions::SetXRY;
+	opcodesMap[opcodes::ADDYTX] = &Chip8_Instructions::AddYtX;
+	opcodesMap[opcodes::ADDMYTX] = &Chip8_Instructions::AddMYtX;
+	opcodesMap[opcodes::BITOPR] = &Chip8_Instructions::BitOpR;
+	opcodesMap[opcodes::BITOPL] = &Chip8_Instructions::BITOpL;
+	opcodesMap[opcodes::SETXYMX] = &Chip8_Instructions::SetXYMX;
+
 	opcodesMap[opcodes::SETREG] = &Chip8_Instructions::setRegister;
 	opcodesMap[opcodes::ADDREG] = &Chip8_Instructions::addRegister;
 	opcodesMap[opcodes::SETI] = &Chip8_Instructions::setIndexRegister;
@@ -101,7 +112,7 @@ void Chip8_Instructions::SetXOY(uint16_t a_data)
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
 
-	chipMemory.setRegister(X, chipMemory.getRegister(Y) | chipMemory.getRegister(Y));
+	chipMemory.setRegister(X, chipMemory.getRegister(X) | chipMemory.getRegister(Y));
 }
 
 void Chip8_Instructions::SetXAY(uint16_t a_data)
@@ -109,7 +120,7 @@ void Chip8_Instructions::SetXAY(uint16_t a_data)
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
 
-	chipMemory.setRegister(X, chipMemory.getRegister(Y) & chipMemory.getRegister(Y));
+	chipMemory.setRegister(X, chipMemory.getRegister(X) & chipMemory.getRegister(Y));
 }
 
 void Chip8_Instructions::SetXRY(uint16_t a_data)
@@ -117,7 +128,7 @@ void Chip8_Instructions::SetXRY(uint16_t a_data)
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
 
-	chipMemory.setRegister(X, chipMemory.getRegister(Y) ^ chipMemory.getRegister(Y));
+	chipMemory.setRegister(X, chipMemory.getRegister(X) ^ chipMemory.getRegister(Y));
 }
 
 void Chip8_Instructions::AddYtX(uint16_t a_data)
@@ -126,7 +137,7 @@ void Chip8_Instructions::AddYtX(uint16_t a_data)
 	uint8_t Y = (a_data & 0x00F0) >> 4;
 
 	uint8_t VX = chipMemory.getRegister(X);
-	uint8_t VY = chipMemory.getRegister(X);
+	uint8_t VY = chipMemory.getRegister(Y);
 
 	uint8_t VXY = chipMemory.getRegister(X) + chipMemory.getRegister(Y);
 
@@ -139,27 +150,65 @@ void Chip8_Instructions::AddYtX(uint16_t a_data)
 		chipMemory.setRegister(15, 0);//VF to 0
 	}
 
-	chipMemory.setRegister(X,VXY);
+	chipMemory.setRegister(X, VXY);
 }
 
 void Chip8_Instructions::AddMYtX(uint16_t a_data)
 {
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t Y = (a_data & 0x00F0) >> 4;
 
+	uint8_t VX = chipMemory.getRegister(X);
+	uint8_t VY = chipMemory.getRegister(Y);
+
+	if (VX < VY)
+	{
+		chipMemory.setRegister(15, 1);//VF to 1
+	}
+	else
+	{
+		chipMemory.setRegister(15, 0);//VF to 0
+	}
+
+	chipMemory.setRegister(X, static_cast<uint8_t>(VX - VY));
 }
 
 void Chip8_Instructions::BitOpR(uint16_t a_data)
 {
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t VX = chipMemory.getRegister(X);
 
-}
-
-void Chip8_Instructions::SetXYMX(uint16_t a_data)
-{
-
+	chipMemory.setRegister(15, VX & 1);
+	chipMemory.shiftRegisterRight(X);
 }
 
 void Chip8_Instructions::BITOpL(uint16_t a_data)
 {
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t VX = chipMemory.getRegister(X);
 
+	chipMemory.setRegister(15, VX & 1);
+	chipMemory.shiftRegisterLeft(X);
+}
+
+void Chip8_Instructions::SetXYMX(uint16_t a_data)
+{
+	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t Y = (a_data & 0x00F0) >> 4;
+
+	uint8_t VX = chipMemory.getRegister(X);
+	uint8_t VY = chipMemory.getRegister(Y);
+
+	if (VX > VY)
+	{
+		chipMemory.setRegister(15, 1);//VF to 1
+	}
+	else
+	{
+		chipMemory.setRegister(15, 0);//VF to 0
+	}
+
+	chipMemory.setRegister(X, static_cast<uint8_t>(VY - VX));
 }
 
 void Chip8_Instructions::setRegister(uint16_t a_data)

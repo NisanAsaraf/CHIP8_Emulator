@@ -88,6 +88,16 @@ void CHIP8_Memory::printRAM()
     std::cout << std::endl;
 }
 
+void CHIP8_Memory::shiftRegisterRight(uint8_t a_x)
+{
+    v_registers[a_x] >>= 1;
+}
+
+void CHIP8_Memory::shiftRegisterLeft(uint8_t a_x)
+{
+    v_registers[a_x] <<= 1;
+}
+
 void CHIP8_Memory::insertDataToRam(uint8_t a_data)
 {
     v_ram[ramCapacity + 0x200] = a_data;
