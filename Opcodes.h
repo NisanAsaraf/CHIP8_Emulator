@@ -38,14 +38,14 @@ enum class opcodes : uint8_t
 	SETDELAY = 18,		//FX15
 	SETSOUND = 19,		//FX18
 
-	ADDXTI = 16,		//FX1E
-	SETITSPRITE = 17,	//FX29
-	BCD = 18,			//FX33
-	REGDUMP = 19,		//FX55
-	REGLOAD = 19,		//FX65
+	ADDXTI = 20,		//FX1E
+	SETITSPRITE = 21,	//FX29
+	BCD = 22,			//FX33
+	REGDUMP = 23,		//FX55
+	REGLOAD = 24,		//FX65
 
 	RETURN,				//00EE
-	UNKNOWN = 99
+	UNKNOWN = 199
 };
 }//namespace chip8_emulator
 #endif

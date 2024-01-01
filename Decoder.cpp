@@ -12,6 +12,11 @@ uint8_t Chip8_Decoder::getLSB(uint16_t a_code)
 	return (a_code & 0x000f);
 }
 
+uint8_t Chip8_Decoder::getRightByte(uint16_t a_code)
+{
+	return (a_code & 0x00ff);
+}
+
 opcodes Chip8_Decoder::decode(uint16_t a_code)
 {
 	switch (getMSB(a_code))
@@ -74,30 +79,68 @@ opcodes Chip8_Decoder::decode(uint16_t a_code)
 		case 7:
 			return opcodes::SETXYMX;
 			break;
-		case 12:
+		case 14:
 			return opcodes::BITOPL;
 			break;
 		}
+		break;
 	case 9:
-		return opcodes::UNKNOWN;
+		return opcodes::SKIPNXY;
 		break;
 	case 10:
 		return opcodes::SETI;
 		break;
 	case 11:
-		return opcodes::UNKNOWN;
+		return opcodes::JUMPZ;
 		break;
 	case 12:
-		return opcodes::UNKNOWN;
+		return opcodes::RANDX;
 		break;
 	case 13:
 		return opcodes::DRAW;
 		break;
 	case 14:
-		return opcodes::UNKNOWN;
+		switch (getLSB(a_code))
+		{
+		case 1:
+			return opcodes::KEYNX;
+			break;
+		case 14:
+			return opcodes::KEYX;
+			break;
+		}
 		break;
 	case 15:
-		return opcodes::UNKNOWN;
+		switch (getRightByte(a_code))
+		{
+		case 7:
+			return opcodes::GETDELAY;
+			break;
+		case 10:
+			return opcodes::GETKEY;
+			break;
+		case 21:
+			return opcodes::SETDELAY;
+			break;
+		case 24:
+			return opcodes::SETSOUND;
+			break;
+		case 30:
+			return opcodes::ADDXTI;
+			break;
+		case 41:
+			return opcodes::SETITSPRITE;
+			break;
+		case 51:
+			return opcodes::BCD;
+			break;
+		case 85:
+			return opcodes::REGDUMP;
+			break;
+		case 101:
+			return opcodes::REGLOAD;
+			break;
+		}
 		break;
 	default:
 		return opcodes::UNKNOWN;
