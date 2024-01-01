@@ -113,6 +113,11 @@ uint8_t CHIP8_Memory::getSound()
     return sound_timer;
 }
 
+uint8_t& CHIP8_Memory::getRefSound()
+{
+    return sound_timer;
+}
+
 void CHIP8_Memory::setSound(uint8_t a_data) 
 {
     sound_timer = a_data;

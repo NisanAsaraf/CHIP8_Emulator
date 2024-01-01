@@ -3,13 +3,14 @@
 namespace chip8_emulator
 {
 
-CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t& a_index_register)
+CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t& a_index_register, uint8_t& a_sound)
 :
 v_pixelArray{},
 v_stop{},
 v_pixel{},
-v_ram{a_ram},
-v_index_register{ a_index_register }
+v_ram{ a_ram },
+v_index_register{ a_index_register },
+v_sound{ a_sound }
 {
 	v_pixel.w = v_pixelSize;
 	v_pixel.h = v_pixelSize;
@@ -94,6 +95,11 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	}
 }
 
+void CHIP8_Display::soundHandler()
+{
+	
+}
+
 bool CHIP8_Display::renderDisplay() 
 {
 	SDL_RenderPresent(v_renderer);
@@ -105,7 +111,6 @@ bool CHIP8_Display::renderDisplay()
 		{
 			return true;
 		}
-
 	}
 	return false;
 }

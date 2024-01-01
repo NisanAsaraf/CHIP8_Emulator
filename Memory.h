@@ -39,6 +39,7 @@ public:
     uint8_t getDelay();
     void setDelay(uint8_t a_data);
     uint8_t getSound();
+    uint8_t& getRefSound();
     void setSound(uint8_t a_data);
 
 private:
