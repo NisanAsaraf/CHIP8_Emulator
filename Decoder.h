@@ -9,6 +9,7 @@ class Chip8_Decoder
 {
 public:
 	uint8_t getMSB(uint16_t a_code);
+	uint8_t getLSB(uint16_t a_code);
 	opcodes decode(uint16_t a_code);
 };
 }//namespace chip8_emulator

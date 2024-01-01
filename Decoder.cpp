@@ -7,6 +7,11 @@ uint8_t Chip8_Decoder::getMSB(uint16_t a_code)
 	return (a_code & 0xf000) >> 12;
 }
 
+uint8_t Chip8_Decoder::getLSB(uint16_t a_code)
+{
+	return (a_code & 0x000f);
+}
+
 opcodes Chip8_Decoder::decode(uint16_t a_code)
 {
 	switch (getMSB(a_code))
@@ -16,22 +21,25 @@ opcodes Chip8_Decoder::decode(uint16_t a_code)
 		{
 			return opcodes::CLEAR_SCREEN;
 		}
-		return opcodes::UNKNOWN;
+		else if (a_code == 0x00ee)
+		{
+			return opcodes::RETURN;
+		}
 		break;
 	case 1:
 		return opcodes::JUMP;
 		break;
 	case 2:
-		return opcodes::UNKNOWN;
+		return opcodes::CALL;
 		break;
 	case 3:
-		return opcodes::UNKNOWN;
+		return opcodes::SKIPX;
 		break;
 	case 4:
-		return opcodes::UNKNOWN;
+		return opcodes::SKIPNX;
 		break;
 	case 5:
-		return opcodes::UNKNOWN;
+		return opcodes::SKIPXY;
 		break;
 	case 6:
 		return opcodes::SETREG;
@@ -40,8 +48,36 @@ opcodes Chip8_Decoder::decode(uint16_t a_code)
 		return opcodes::ADDREG;
 		break;
 	case 8:
-		return opcodes::UNKNOWN;
-		break;
+		switch (getLSB(a_code))
+		{
+		case 0:
+			return opcodes::SETXY;
+			break;
+		case 1:
+			return opcodes::SETXOY;
+			break;
+		case 2:
+			return opcodes::SETXAY;
+			break;
+		case 3:
+			return opcodes::SETXRY;
+			break;
+		case 4:
+			return opcodes::ADDYTX;
+			break;
+		case 5:
+			return opcodes::ADDMYTX;
+			break;
+		case 6:
+			return opcodes::BITOPR;
+			break;
+		case 7:
+			return opcodes::SETXYMX;
+			break;
+		case 12:
+			return opcodes::BITOPL;
+			break;
+		}
 	case 9:
 		return opcodes::UNKNOWN;
 		break;
