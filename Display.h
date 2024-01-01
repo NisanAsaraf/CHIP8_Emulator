@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <Array>
 #include <iostream>
+#include <windows.h>
 
 namespace chip8_emulator
 {

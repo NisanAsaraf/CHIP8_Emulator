@@ -97,13 +97,17 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 
 void CHIP8_Display::soundHandler()
 {
-	
+	if (v_sound)
+	{
+		Beep(1000, 200);
+	}
 }
 
 bool CHIP8_Display::renderDisplay() 
 {
 	SDL_RenderPresent(v_renderer);
 	createGrid();
+	soundHandler();
 	SDL_Event e;
 	while (SDL_PollEvent(&e) != 0) 
 	{
