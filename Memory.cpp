@@ -187,7 +187,7 @@ void CHIP8_Memory::setIndexRegister(uint16_t a_data)
 
 void CHIP8_Memory::shiftStackRight()
 {
-    for (int i = 15; i >= 0; --i)
+    for (int i = 15; i > 0; --i)
     {
         v_stack[i] = v_stack[i - 1];
     }
@@ -196,7 +196,7 @@ void CHIP8_Memory::shiftStackRight()
 
 void CHIP8_Memory::shiftStackLeft()
 {
-    for (int i = 0; i < 16; ++i)
+    for (int i = 0; i < 15; ++i)
     {
         v_stack[i] = v_stack[i + 1];
     }
