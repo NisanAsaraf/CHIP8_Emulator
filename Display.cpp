@@ -41,7 +41,7 @@ v_flag{a_flag}
 
 void CHIP8_Display::createGrid()
 {
-	SDL_SetRenderDrawColor(v_renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(v_renderer, 0, 0, 0, 255);
 	for (int i = 1; i < SCREEN_WIDTH; ++i)
 	{
 		int xPos = v_pixelSize * i;
@@ -71,9 +71,9 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	{
 		for (uint8_t j = 0; j < 8; ++j)
 		{
-			v_flag = 0;
-			int x = (a_x + j);
-			int y = (a_y + i);
+			v_flag = 1;
+			int x = a_x + j;
+			int y = a_y + i;
 
 			bool before = v_pixelArray[x][y];
 
@@ -92,8 +92,8 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	{
 		for (int y = 0; y < SCREEN_HEIGHT; ++y) 
 		{
-			v_pixel.x = a_x + x * (v_pixelSize - 1);
-			v_pixel.y = a_y + y * (v_pixelSize - 1);
+			v_pixel.x = x * (v_pixelSize);
+			v_pixel.y = y * (v_pixelSize);
 
 			if (v_pixelArray[x][y])
 			{
@@ -108,18 +108,10 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	}
 }
 
-void CHIP8_Display::soundHandler()
-{
-	if (v_sound)
-	{
-		Beep(1000, 200);
-	}
-}
-
 bool CHIP8_Display::renderDisplay() 
 {
-	SDL_RenderPresent(v_renderer);
 	createGrid();
+	SDL_RenderPresent(v_renderer);
 	soundHandler();
 	SDL_Event e;
 	while (SDL_PollEvent(&e) != 0) 
@@ -131,6 +123,15 @@ bool CHIP8_Display::renderDisplay()
 	}
 	return false;
 }
+
+void CHIP8_Display::soundHandler()
+{
+	if (v_sound)
+	{
+		Beep(1000, 200);
+	}
+}
+
 
 
 void CHIP8_Display::quitDisplay()

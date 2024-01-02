@@ -74,12 +74,13 @@ void Chip8_Manager::run(std::string a_filename)
 
     while (!v_stop)
     {
+        v_stop = v_display.renderDisplay();
         data = fetch();
         if (!execute(data, decode(data)))
         {
             break;
         }
-        v_stop = v_display.renderDisplay();
+        //std::cin.get();
     }
     v_display.quitDisplay();
 }
