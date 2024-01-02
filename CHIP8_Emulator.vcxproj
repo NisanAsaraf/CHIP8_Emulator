@@ -130,6 +130,7 @@
     <None Include="..\..\..\Downloads\ibm.ch8" />
     <None Include="IBMLogo.ch8" />
     <None Include="packages.config" />
+    <None Include="test_opcode.ch8" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chip8_Manager.cpp" />

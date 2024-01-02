@@ -21,6 +21,9 @@
     <None Include="..\..\..\Downloads\ibm.ch8">
       <Filter>Assets</Filter>
     </None>
+    <None Include="test_opcode.ch8">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
