@@ -120,32 +120,38 @@ void Chip8_Instructions::Chip8_Instructions::SetXY(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
-
-	chipMemory.setRegister(X, chipMemory.getRegister(Y));
+	uint8_t VY = chipMemory.getRegister(Y);
+	chipMemory.setRegister(X, static_cast<uint8_t>(VY) );
 }
 
 void Chip8_Instructions::SetXOY(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
+	uint8_t VX = chipMemory.getRegister(X);
+	uint8_t VY = chipMemory.getRegister(Y);
 
-	chipMemory.setRegister(X, chipMemory.getRegister(X) | chipMemory.getRegister(Y));
+	chipMemory.setRegister(X, static_cast<uint8_t> (VX | VY) );
 }
 
 void Chip8_Instructions::SetXAY(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
+	uint8_t VX = chipMemory.getRegister(X);
+	uint8_t VY = chipMemory.getRegister(Y);
 
-	chipMemory.setRegister(X, chipMemory.getRegister(X) & chipMemory.getRegister(Y));
+	chipMemory.setRegister(X, static_cast<uint8_t> (VX & VY) );
 }
 
 void Chip8_Instructions::SetXRY(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
+	uint8_t VX = chipMemory.getRegister(X);
+	uint8_t VY = chipMemory.getRegister(Y);
 
-	chipMemory.setRegister(X, chipMemory.getRegister(X) ^ chipMemory.getRegister(Y));
+	chipMemory.setRegister(X, static_cast<uint8_t> (VX ^ VY));
 }
 
 void Chip8_Instructions::AddYtX(uint16_t a_data)

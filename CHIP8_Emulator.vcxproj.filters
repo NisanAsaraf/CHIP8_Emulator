@@ -24,6 +24,15 @@
     <None Include="test_opcode.ch8">
       <Filter>Assets</Filter>
     </None>
+    <None Include="SCTEST.ch8">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="..\..\..\Downloads\bc_test.ch8">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="BLINKY">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

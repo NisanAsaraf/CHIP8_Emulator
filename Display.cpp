@@ -75,8 +75,6 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 			int x = a_x + j;
 			int y = a_y + i;
 
-			bool before = v_pixelArray[x][y];
-
 			if (x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
 			{
 				break;
@@ -84,7 +82,7 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 
 			bool pixel = v_ram[v_index_register + i] & (0x80 >> j);
 			v_pixelArray[x][y] ^= pixel;
-			v_flag = pixel;
+			v_flag = v_pixelArray[x][y];
 		}
 	}
 
