@@ -3,14 +3,15 @@
 namespace chip8_emulator
 {
 
-CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t& a_index_register, uint8_t& a_sound)
+CHIP8_Display::CHIP8_Display(std::array<uint8_t, 4096>& a_ram, uint16_t& a_index_register, uint8_t& a_sound, uint8_t& a_flag)
 :
 v_pixelArray{},
 v_stop{},
 v_pixel{},
 v_ram{ a_ram },
 v_index_register{ a_index_register },
-v_sound{ a_sound }
+v_sound{ a_sound },
+v_flag{a_flag}
 {
 	v_pixel.w = v_pixelSize;
 	v_pixel.h = v_pixelSize;
@@ -20,7 +21,7 @@ v_sound{ a_sound }
 		return;
 	}
 
-	v_window = SDL_CreateWindow("CHIP-8", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * v_pixelSize, SCREEN_HEIGHT * v_pixelSize, SDL_WINDOW_SHOWN);
+	v_window = SDL_CreateWindow("CHIP-8", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH * v_pixelSize, SCREEN_HEIGHT * v_pixelSize , SDL_WINDOW_SHOWN);
 
 	if (v_window == NULL)
 	{
@@ -40,7 +41,7 @@ v_sound{ a_sound }
 
 void CHIP8_Display::createGrid()
 {
-	SDL_SetRenderDrawColor(v_renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(v_renderer, 255, 0, 0, 255);
 	for (int i = 1; i < SCREEN_WIDTH; ++i)
 	{
 		int xPos = v_pixelSize * i;
@@ -63,20 +64,27 @@ void CHIP8_Display::clearDisplay()
 
 void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 {	
+	a_x %= SCREEN_WIDTH;
+	a_y %= SCREEN_HEIGHT;
+
 	for (uint8_t i = 0; i < a_n; ++i)
 	{
 		for (uint8_t j = 0; j < 8; ++j)
 		{
+			v_flag = 0;
 			int x = (a_x + j);
-			int y = (a_y + i);	
+			int y = (a_y + i);
 
-			if (x > SCREEN_WIDTH || y > SCREEN_HEIGHT)
+			bool before = v_pixelArray[x][y];
+
+			if (x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
 			{
-				continue;
+				break;
 			}
 
 			bool pixel = v_ram[v_index_register + i] & (0x80 >> j);
 			v_pixelArray[x][y] ^= pixel;
+			v_flag = pixel;
 		}
 	}
 
@@ -84,8 +92,8 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	{
 		for (int y = 0; y < SCREEN_HEIGHT; ++y) 
 		{
-			v_pixel.x = a_x + x * v_pixelSize - 10; 
-			v_pixel.y = a_y + y * v_pixelSize - 10;
+			v_pixel.x = a_x + x * (v_pixelSize - 1) + 1; 
+			v_pixel.y = a_y + y * (v_pixelSize - 1) + 1;
 
 			if (v_pixelArray[x][y]) 
 			{

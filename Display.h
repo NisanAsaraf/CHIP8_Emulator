@@ -11,7 +11,7 @@ namespace chip8_emulator
 class CHIP8_Display
 {
 public:
-	CHIP8_Display(std::array<uint8_t, 4096>& a_ram , uint16_t& a_index_register, uint8_t& a_sound);
+	CHIP8_Display(std::array<uint8_t, 4096>& a_ram , uint16_t& a_index_register, uint8_t& a_sound, uint8_t& a_flag);
 	void clearDisplay();
 	void draw(uint8_t a_x, uint8_t a_y, uint8_t a_n);
 	bool renderDisplay();
@@ -30,6 +30,7 @@ private:
 	std::array<uint8_t, 4096>& v_ram;
 	uint16_t& v_index_register;
 	uint8_t& v_sound;
+	uint8_t& v_flag;
 	std::array<std::array<bool, SCREEN_HEIGHT>, SCREEN_WIDTH> v_pixelArray;
 	bool v_stop;
 };

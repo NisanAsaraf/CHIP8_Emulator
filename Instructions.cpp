@@ -180,11 +180,11 @@ void Chip8_Instructions::AddMYtX(uint16_t a_data)
 
 	if (VX < VY)
 	{
-		chipMemory.setRegister(15, 1);//VF to 1
+		chipMemory.setRegister(15, 0);//VF to 0
 	}
 	else
 	{
-		chipMemory.setRegister(15, 0);//VF to 0
+		chipMemory.setRegister(15, 1);//VF to 1
 	}
 
 	chipMemory.setRegister(X, static_cast<uint8_t>(VX - VY));
@@ -218,11 +218,11 @@ void Chip8_Instructions::SetXYMX(uint16_t a_data)
 
 	if (VX > VY)
 	{
-		chipMemory.setRegister(15, 1);//VF to 1
+		chipMemory.setRegister(15, 0);//VF to 0
 	}
 	else
 	{
-		chipMemory.setRegister(15, 0);//VF to 0
+		chipMemory.setRegister(15, 1);//VF to 1
 	}
 
 	chipMemory.setRegister(X, static_cast<uint8_t>(VY - VX));

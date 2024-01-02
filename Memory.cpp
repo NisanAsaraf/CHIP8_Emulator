@@ -185,6 +185,11 @@ void CHIP8_Memory::setIndexRegister(uint16_t a_data)
     index_register = a_data;
 }
 
+uint8_t& CHIP8_Memory::getFlag()
+{
+    return v_registers[15];
+}
+
 void CHIP8_Memory::shiftStackRight()
 {
     for (int i = 15; i > 0; --i)

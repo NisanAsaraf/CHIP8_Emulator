@@ -5,7 +5,7 @@ namespace chip8_emulator
 Chip8_Manager::Chip8_Manager()
 :
 v_memory{},
-v_display{v_memory.getRefRAM(), v_memory.getIndexRegister(), v_memory.getRefSound()},
+v_display{v_memory.getRefRAM(), v_memory.getIndexRegister(), v_memory.getRefSound(), v_memory.getFlag()},
 v_decoder{},
 v_instructions{ v_display, v_memory },
 v_stop{ false }
