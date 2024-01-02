@@ -84,8 +84,8 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 	{
 		for (int y = 0; y < SCREEN_HEIGHT; ++y) 
 		{
-			v_pixel.x = a_x + x * v_pixelSize; 
-			v_pixel.y = a_y + y * v_pixelSize;
+			v_pixel.x = a_x + x * v_pixelSize - 10; 
+			v_pixel.y = a_y + y * v_pixelSize - 10;
 
 			if (v_pixelArray[x][y]) 
 			{

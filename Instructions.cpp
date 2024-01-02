@@ -317,18 +317,18 @@ void Chip8_Instructions::SetBCD(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t VX = chipMemory.getRegister(X);
-	uint8_t I0, I1, I2;
+	uint8_t hundreds, tens, digits;
 	uint16_t index = chipMemory.getIndexRegister();
 
-	I0 = VX % 10;
+	digits = VX % 10;
 	VX /= 10;
-	I1 = VX % 10;
+	tens = VX % 10;
 	VX /= 10;
-	I2 = VX % 10;
+	hundreds = VX % 10;
 
-	chipMemory.setRAMdata(index, I0);
-	chipMemory.setRAMdata(index + 1, I1);
-	chipMemory.setRAMdata(index + 2, I2);
+	chipMemory.setRAMdata(index, hundreds);
+	chipMemory.setRAMdata(index + 1, tens);
+	chipMemory.setRAMdata(index + 2, digits);
 }
 
 void Chip8_Instructions::RegDump(uint16_t a_data)
