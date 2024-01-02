@@ -110,7 +110,7 @@ void Chip8_Instructions::SkipNXY(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t Y = (a_data & 0x00F0) >> 4;
-	if (chipMemory.getRegister(X) == chipMemory.getRegister(Y))
+	if (chipMemory.getRegister(X) != chipMemory.getRegister(Y))
 	{
 		chipMemory.incrementCounter();
 	}
@@ -241,7 +241,7 @@ void Chip8_Instructions::RandX(uint16_t a_data)
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<uint16_t> dis(0, std::numeric_limits<uint8_t>::max());
+	std::uniform_int_distribution<uint16_t> dis(0, 255);
 	uint8_t random_number = static_cast<uint8_t>(dis(gen)); 
 	
 	chipMemory.setRegister(X, random_number & data);
