@@ -79,10 +79,10 @@ void CHIP8_Display::draw(uint8_t a_x, uint8_t a_y, uint8_t a_n)
 			{
 				break;
 			}
-
+			bool current = v_pixelArray[x][y];
 			bool pixel = v_ram[v_index_register + i] & (0x80 >> j);
 			v_pixelArray[x][y] ^= pixel;
-			v_flag = v_pixelArray[x][y];
+			v_flag = (current && pixel) ? 1 : 0;
 		}
 	}
 
@@ -129,8 +129,6 @@ void CHIP8_Display::soundHandler()
 		Beep(1000, 200);
 	}
 }
-
-
 
 void CHIP8_Display::quitDisplay()
 {

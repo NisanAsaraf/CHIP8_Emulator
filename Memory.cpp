@@ -9,7 +9,7 @@ CHIP8_Memory::CHIP8_Memory()
     initializeFont();
     v_registers.fill(0);
     v_stack.fill(0);
-    program_counter = 0x200; // Start CHIP-8 programs typically at address 0x200
+    program_counter = 0x200;
     index_register = 0;
     delay_timer = 0;
     sound_timer = 0;

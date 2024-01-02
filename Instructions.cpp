@@ -68,7 +68,7 @@ void Chip8_Instructions::Call(uint16_t a_data)
 	uint16_t address = (a_data & 0x0FFF);
 	chipMemory.pushStack(chipMemory.getProgramCounter());
 	chipMemory.jumpToAddress(address);
-	std::cout << "jumped to " << std::hex << static_cast<int>(address) << std::endl;
+	std::cout << "called to " << std::hex << static_cast<int>(address) << std::endl;
 }
 
 void Chip8_Instructions::Return(uint16_t a_data)
