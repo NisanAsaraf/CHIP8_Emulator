@@ -20,7 +20,7 @@ public:
 	void createGrid();
 	void soundHandler();
 	uint8_t getKeyFromMap(char a_key);
-
+	bool getKeyState(uint8_t a_key);
 private:
 	SDL_Window* v_window = nullptr;
 	SDL_Renderer* v_renderer = nullptr;
@@ -36,7 +36,8 @@ private:
 	uint8_t& v_flag;
 	std::array<std::array<bool, SCREEN_HEIGHT>, SCREEN_WIDTH> v_pixelArray;
 
-	std::unordered_map<char, uint8_t> keyMap;
+	std::unordered_map<char, uint8_t> v_keyMap;
+	std::array<bool, 16> v_keyState;
 
 	bool v_stop;
 };

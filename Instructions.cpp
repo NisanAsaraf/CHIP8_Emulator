@@ -272,7 +272,8 @@ void Chip8_Instructions::RandX(uint16_t a_data)
 void Chip8_Instructions::KeyX(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
-	if (chipMemory.getRegister(X) < 16)
+	uint8_t VX = chipMemory.getRegister(X);
+	if (VX < 16 && chipDisplay.getKeyState(VX))
 	{
 		chipMemory.incrementCounter();
 	}
@@ -282,13 +283,13 @@ void Chip8_Instructions::KeyX(uint16_t a_data)
 void Chip8_Instructions::KeyNX(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
-	if (chipMemory.getRegister(X) > 16)
+	uint8_t VX = chipMemory.getRegister(X);
+	if (VX > 16 && !chipDisplay.getKeyState(VX))
 	{
 		chipMemory.incrementCounter();
 	}
 	std::cout << "KeyNX " << std::endl;
 }
-
 
 void Chip8_Instructions::GetDelay(uint16_t a_data)
 {
@@ -306,7 +307,8 @@ void Chip8_Instructions::GetKey(uint16_t a_data)
 	if (_kbhit())
 	{
 		char keyPressed = _getch();
-		if (chipDisplay.getKeyFromMap(keyPressed) != 0xFF)
+		key = chipDisplay.getKeyFromMap(keyPressed);
+		if (key != 0xFF)
 		{
 			chipMemory.setRegister(X, key);
 		}
@@ -315,7 +317,7 @@ void Chip8_Instructions::GetKey(uint16_t a_data)
 	{
 		chipMemory.decrementCounter();
 	}
-	std::cout << "GetKey " << std::endl;
+	std::cout << "GetKey: " << key << std::endl;
 }
 
 void Chip8_Instructions::SetDelay(uint16_t a_data)

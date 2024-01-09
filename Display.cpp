@@ -11,12 +11,13 @@ v_pixel{},
 v_ram{ a_ram },
 v_index_register{ a_index_register },
 v_sound{ a_sound },
-v_flag{a_flag}
+v_flag{a_flag},
+v_keyState{}
 {
 	v_pixel.w = v_pixelSize;
 	v_pixel.h = v_pixelSize;
 
-	std::unordered_map<char, uint8_t> keyMap =
+	std::unordered_map<char, uint8_t> v_keyMap =
 	{
 		{'1', 0x1}, {'2', 0x2}, {'3', 0x3}, {'4', 0x4},
 		{'5', 0x5}, {'6', 0x6}, {'7', 0x7}, {'8', 0x8},
@@ -49,14 +50,25 @@ v_flag{a_flag}
 
 uint8_t CHIP8_Display::getKeyFromMap(char a_key)
 {
-	if (keyMap.find(a_key) != keyMap.end())
+	if (v_keyMap.find(a_key) != v_keyMap.end())
 	{
-		return keyMap[a_key];
+		return v_keyMap[a_key];
+		v_keyState[a_key] = !v_keyState[a_key];
 	}
 	else
 	{
 		return 0xFF;
 	}
+}
+
+bool CHIP8_Display::getKeyState(uint8_t a_key)
+{
+	if (a_key > 15)
+	{
+		std::cout << "GETKEYSTATE ERROR" << std::endl;
+		return false;
+	}
+	return v_keyState[a_key];
 }
 
 void CHIP8_Display::createGrid()
