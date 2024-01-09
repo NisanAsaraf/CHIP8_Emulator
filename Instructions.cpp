@@ -85,8 +85,8 @@ void Chip8_Instructions::SkipX(uint16_t a_data)
 	if (chipMemory.getRegister(X) == data)
 	{
 		chipMemory.incrementCounter();
+		std::cout << "SkipX " << std::endl;
 	}
-	std::cout << "SkipX " << std::endl;
 }
 
 void Chip8_Instructions::SkipNX(uint16_t a_data)
@@ -96,8 +96,8 @@ void Chip8_Instructions::SkipNX(uint16_t a_data)
 	if (chipMemory.getRegister(X) != data)
 	{
 		chipMemory.incrementCounter();
+		std::cout << "SkipNX " << std::endl;
 	}
-	std::cout << "SkipNX " << std::endl;
 }
 
 void Chip8_Instructions::SkipXY(uint16_t a_data)
