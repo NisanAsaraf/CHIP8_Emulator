@@ -15,16 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="IBMLogo.ch8">
-      <Filter>Assets</Filter>
-    </None>
     <None Include="..\..\..\Downloads\ibm.ch8">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="test_opcode.ch8">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="SCTEST.ch8">
       <Filter>Assets</Filter>
     </None>
     <None Include="..\..\..\Downloads\bc_test.ch8">

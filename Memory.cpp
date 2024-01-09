@@ -39,7 +39,7 @@ void CHIP8_Memory::initializeFont()
 
     for(int i = 0; i < 16 * 5; i++)
     {
-        v_ram[0x050 + i] = chip8Font[i];
+        v_ram[i] = chip8Font[i];
     }
 }
 
