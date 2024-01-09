@@ -74,6 +74,7 @@ void Chip8_Instructions::Call(uint16_t a_data)
 void Chip8_Instructions::Return(uint16_t a_data)
 {
 	chipMemory.jumpToAddress(chipMemory.popStack());
+	std::cout << "returned " << std::hex << static_cast<int>(a_data) << std::endl;
 }
 
 void Chip8_Instructions::SkipX(uint16_t a_data)
@@ -84,6 +85,7 @@ void Chip8_Instructions::SkipX(uint16_t a_data)
 	{
 		chipMemory.incrementCounter();
 	}
+	std::cout << "SkipX " << std::endl;
 }
 
 void Chip8_Instructions::SkipNX(uint16_t a_data)
@@ -94,6 +96,7 @@ void Chip8_Instructions::SkipNX(uint16_t a_data)
 	{
 		chipMemory.incrementCounter();
 	}
+	std::cout << "SkipNX " << std::endl;
 }
 
 void Chip8_Instructions::SkipXY(uint16_t a_data)
@@ -104,6 +107,7 @@ void Chip8_Instructions::SkipXY(uint16_t a_data)
 	{
 		chipMemory.incrementCounter();
 	}
+	std::cout << "SkipXY " << std::endl;
 }
 
 void Chip8_Instructions::SkipNXY(uint16_t a_data)
@@ -114,6 +118,7 @@ void Chip8_Instructions::SkipNXY(uint16_t a_data)
 	{
 		chipMemory.incrementCounter();
 	}
+	std::cout << "SkipNXY " << std::endl;
 }
 
 void Chip8_Instructions::Chip8_Instructions::SetXY(uint16_t a_data)
@@ -122,6 +127,7 @@ void Chip8_Instructions::Chip8_Instructions::SetXY(uint16_t a_data)
 	uint8_t Y = (a_data & 0x00F0) >> 4;
 	uint8_t VY = chipMemory.getRegister(Y);
 	chipMemory.setRegister(X, static_cast<uint8_t>(VY) );
+	std::cout << "SetXY " << std::endl;
 }
 
 void Chip8_Instructions::SetXOY(uint16_t a_data)
@@ -132,6 +138,7 @@ void Chip8_Instructions::SetXOY(uint16_t a_data)
 	uint8_t VY = chipMemory.getRegister(Y);
 
 	chipMemory.setRegister(X, static_cast<uint8_t> (VX | VY) );
+	std::cout << "SetXOY " << std::endl;
 }
 
 void Chip8_Instructions::SetXAY(uint16_t a_data)
@@ -142,6 +149,7 @@ void Chip8_Instructions::SetXAY(uint16_t a_data)
 	uint8_t VY = chipMemory.getRegister(Y);
 
 	chipMemory.setRegister(X, static_cast<uint8_t> (VX & VY) );
+	std::cout << "SetXAY " << std::endl;
 }
 
 void Chip8_Instructions::SetXRY(uint16_t a_data)
@@ -152,6 +160,7 @@ void Chip8_Instructions::SetXRY(uint16_t a_data)
 	uint8_t VY = chipMemory.getRegister(Y);
 
 	chipMemory.setRegister(X, static_cast<uint8_t> (VX ^ VY));
+	std::cout << "SetXRY " << std::endl;
 }
 
 void Chip8_Instructions::AddYtX(uint16_t a_data)
@@ -174,6 +183,7 @@ void Chip8_Instructions::AddYtX(uint16_t a_data)
 	}
 
 	chipMemory.setRegister(X, VXY);
+	std::cout << "AddYtX " << std::endl;
 }
 
 void Chip8_Instructions::AddMYtX(uint16_t a_data)
@@ -194,6 +204,7 @@ void Chip8_Instructions::AddMYtX(uint16_t a_data)
 	}
 
 	chipMemory.setRegister(X, static_cast<uint8_t>(VX - VY));
+	std::cout << "AddMYtX " << std::endl;
 }
 
 void Chip8_Instructions::BitOpR(uint16_t a_data)
@@ -203,6 +214,7 @@ void Chip8_Instructions::BitOpR(uint16_t a_data)
 
 	chipMemory.setRegister(15, VX & 1);
 	chipMemory.shiftRegisterRight(X);
+	std::cout << "BitOpR " << std::endl;
 }
 
 void Chip8_Instructions::BITOpL(uint16_t a_data)
@@ -212,6 +224,7 @@ void Chip8_Instructions::BITOpL(uint16_t a_data)
 
 	chipMemory.setRegister(15, VX & 1);
 	chipMemory.shiftRegisterLeft(X);
+	std::cout << "BitOpL " << std::endl;
 }
 
 void Chip8_Instructions::SetXYMX(uint16_t a_data)
@@ -232,12 +245,14 @@ void Chip8_Instructions::SetXYMX(uint16_t a_data)
 	}
 
 	chipMemory.setRegister(X, static_cast<uint8_t>(VY - VX));
+	std::cout << "SetXYMX " << std::endl;
 }
 
 void Chip8_Instructions::JumpZ(uint16_t a_data)
 {
 	uint16_t address = a_data & 0x0FFF;
 	chipMemory.jumpToAddress(chipMemory.getRegister(0) + address);
+	std::cout << "JumpZ " << std::endl;
 }
 
 void Chip8_Instructions::RandX(uint16_t a_data)
@@ -251,6 +266,7 @@ void Chip8_Instructions::RandX(uint16_t a_data)
 	uint8_t random_number = static_cast<uint8_t>(dis(gen)); 
 	
 	chipMemory.setRegister(X, random_number & data);
+	std::cout << "RandX " << std::endl;
 }
 
 void Chip8_Instructions::KeyX(uint16_t a_data)
@@ -260,6 +276,7 @@ void Chip8_Instructions::KeyX(uint16_t a_data)
 	{
 		chipMemory.incrementCounter();
 	}
+	std::cout << "KeyX " << std::endl;
 }
 
 void Chip8_Instructions::KeyNX(uint16_t a_data)
@@ -269,6 +286,7 @@ void Chip8_Instructions::KeyNX(uint16_t a_data)
 	{
 		chipMemory.incrementCounter();
 	}
+	std::cout << "KeyNX " << std::endl;
 }
 
 
@@ -277,6 +295,7 @@ void Chip8_Instructions::GetDelay(uint16_t a_data)
 	uint8_t X = (a_data & 0x0F00) >> 8;
 
 	chipMemory.setRegister(X, chipMemory.getDelay());
+	std::cout << "GetDelay " << std::endl;
 }
 
 void Chip8_Instructions::GetKey(uint16_t a_data)
@@ -291,18 +310,21 @@ void Chip8_Instructions::GetKey(uint16_t a_data)
 	{
 		chipMemory.decrementCounter();
 	}
+	std::cout << "GetKey " << std::endl;
 }
 
 void Chip8_Instructions::SetDelay(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	chipMemory.setDelay(chipMemory.getRegister(X));
+	std::cout << "SetDelay " << std::endl;
 }
 
 void Chip8_Instructions::SetSound(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	chipMemory.setSound(chipMemory.getRegister(X));
+	std::cout << "SetSound " << std::endl;
 }
 
 void Chip8_Instructions::AddXTI(uint16_t a_data)
@@ -310,6 +332,7 @@ void Chip8_Instructions::AddXTI(uint16_t a_data)
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t VX = chipMemory.getRegister(X);
 	chipMemory.setIndexRegister(chipMemory.getIndexRegister() + VX);
+	std::cout << "AddXTI " << std::endl;
 }
 
 void Chip8_Instructions::SetIsprite(uint16_t a_data)
@@ -317,6 +340,7 @@ void Chip8_Instructions::SetIsprite(uint16_t a_data)
 	uint8_t X = (a_data & 0x0F00) >> 8;
 	uint8_t VX = chipMemory.getRegister(X);
 	chipMemory.setIndexRegister(chipMemory.getRAMnibble((VX & 0x000F) * 5));
+	std::cout << "SetIsprite " << std::endl;
 }
 
 void Chip8_Instructions::SetBCD(uint16_t a_data)
@@ -335,6 +359,7 @@ void Chip8_Instructions::SetBCD(uint16_t a_data)
 	chipMemory.setRAMdata(index, hundreds);
 	chipMemory.setRAMdata(index + 1, tens);
 	chipMemory.setRAMdata(index + 2, digits);
+	std::cout << "SetBCD " << std::endl;
 }
 
 void Chip8_Instructions::RegDump(uint16_t a_data)
@@ -345,6 +370,7 @@ void Chip8_Instructions::RegDump(uint16_t a_data)
 	{
 		chipMemory.setRAMdata(index + i, chipMemory.getRegister(i));
 	}
+	std::cout << "RegDump " << std::endl;
 }
 
 void Chip8_Instructions::RegLoad(uint16_t a_data)
@@ -355,6 +381,7 @@ void Chip8_Instructions::RegLoad(uint16_t a_data)
 	{
 		chipMemory.setRegister(i, chipMemory.getRAMnibble(index + i));
 	}
+	std::cout << "RegLoad " << std::endl;
 }
 
 void Chip8_Instructions::setRegister(uint16_t a_data)
