@@ -1,6 +1,7 @@
 #ifndef CHIP8_MEMORY_H
 #define CHIP8_MEMORY_H
 #include <array>
+#include <Stack>
 #include <cstdint>
 #include <iostream>
 
@@ -51,8 +52,6 @@ private:
     uint16_t index_register; 
     uint8_t delay_timer; 
     uint8_t sound_timer; 
-
-    static constexpr uint16_t DISPLAY_START = 0xF00;    // Start address of the display memory
 };
 }//namespace chip8_emulator
 #endif

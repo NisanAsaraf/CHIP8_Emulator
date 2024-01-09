@@ -73,8 +73,9 @@ void Chip8_Instructions::Call(uint16_t a_data)
 
 void Chip8_Instructions::Return(uint16_t a_data)
 {
-	chipMemory.jumpToAddress(chipMemory.popStack());
-	std::cout << "returned " << std::hex << static_cast<int>(a_data) << std::endl;
+	uint16_t ret = chipMemory.popStack();
+	chipMemory.jumpToAddress(ret);
+	std::cout << "returned " << std::hex << static_cast<int>(ret) << std::endl;
 }
 
 void Chip8_Instructions::SkipX(uint16_t a_data)
@@ -412,7 +413,7 @@ void Chip8_Instructions::setIndexRegister(uint16_t a_data)
 {
 	uint16_t indexReg = a_data & 0x0FFF;
 	chipMemory.setIndexRegister(indexReg);
-	std::cout << "register index set!" << std::endl;
+	std::cout << "register index set!"<< static_cast<int>(indexReg) << std::endl;
 }
 
 void Chip8_Instructions::draw(uint16_t a_data)

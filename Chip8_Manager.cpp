@@ -78,7 +78,7 @@ void Chip8_Manager::run(std::string a_filename)
         data = fetch();
         if (!execute(data, decode(data)))
         {
-            break;
+            continue;
         }
         //std::cin.get();
     }
