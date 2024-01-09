@@ -306,11 +306,10 @@ void Chip8_Instructions::GetKey(uint16_t a_data)
 	if (_kbhit())
 	{
 		char keyPressed = _getch();
-		if (keyMap.find(keyPressed) != keyMap.end()) 
+		if (chipDisplay.getKeyFromMap(keyPressed) != 0xFF)
 		{
-			key = keyMap[keyPressed];
+			chipMemory.setRegister(X, key);
 		}
-		chipMemory.setRegister(X, key);
 	}
 	else
 	{

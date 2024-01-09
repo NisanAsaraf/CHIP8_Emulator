@@ -16,6 +16,14 @@ v_flag{a_flag}
 	v_pixel.w = v_pixelSize;
 	v_pixel.h = v_pixelSize;
 
+	std::unordered_map<char, uint8_t> keyMap =
+	{
+		{'1', 0x1}, {'2', 0x2}, {'3', 0x3}, {'4', 0x4},
+		{'5', 0x5}, {'6', 0x6}, {'7', 0x7}, {'8', 0x8},
+		{'9', 0x9}, {'0', 0x0}, {'a', 0xa}, {'b', 0xb},
+		{'c', 0xc}, {'d', 0xd}, {'e', 0xe}, {'f', 0xf}
+	};
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		return;
@@ -36,6 +44,18 @@ v_flag{a_flag}
 		SDL_DestroyWindow(v_window);
 		SDL_Quit();
 		return;
+	}
+}
+
+uint8_t CHIP8_Display::getKeyFromMap(char a_key)
+{
+	if (keyMap.find(a_key) != keyMap.end())
+	{
+		return keyMap[a_key];
+	}
+	else
+	{
+		return 0xFF;
 	}
 }
 

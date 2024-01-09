@@ -55,13 +55,7 @@ public:
 	void draw(uint16_t a_data);
 	void Return(uint16_t a_data);
 
-	std::unordered_map<char, uint8_t> keyMap =
-	{
-		{'1', 0x1}, {'2', 0x2}, {'3', 0x3}, {'4', 0xC},
-		{'q', 0x4}, {'w', 0x5}, {'e', 0x6}, {'r', 0xD},
-		{'a', 0x7}, {'s', 0x8}, {'d', 0x9}, {'f', 0xE},
-		{'z', 0xA}, {'x', 0x0}, {'c', 0xB}, {'v', 0xF}
-	};
+
 
 private:
 	CHIP8_Display& chipDisplay;
