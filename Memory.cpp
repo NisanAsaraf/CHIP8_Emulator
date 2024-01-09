@@ -62,6 +62,7 @@ size_t CHIP8_Memory::getRAMcapacity()
 {
     return ramCapacity;
 }
+
 uint16_t CHIP8_Memory::getProgramCounter()
 {
     return program_counter;

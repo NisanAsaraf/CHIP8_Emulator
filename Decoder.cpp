@@ -102,10 +102,10 @@ opcodes Chip8_Decoder::decode(uint16_t a_code)
 	case 14:
 		switch (getLSB(a_code))
 		{
-		case 1:
+		case 0x01:
 			return opcodes::KEYNX;
 			break;
-		case 14:
+		case 0x0a:
 			return opcodes::KEYX;
 			break;
 		}
@@ -113,31 +113,31 @@ opcodes Chip8_Decoder::decode(uint16_t a_code)
 	case 15:
 		switch (getRightByte(a_code))
 		{
-		case 7:
+		case 0x07:
 			return opcodes::GETDELAY;
 			break;
-		case 10:
+		case 0x0a:
 			return opcodes::GETKEY;
 			break;
-		case 21:
+		case 0x15:
 			return opcodes::SETDELAY;
 			break;
-		case 24:
+		case 0x18:
 			return opcodes::SETSOUND;
 			break;
-		case 30:
+		case 0x1e:
 			return opcodes::ADDXTI;
 			break;
-		case 41:
+		case 0x29:
 			return opcodes::SETITSPRITE;
 			break;
-		case 51:
+		case 0x33:
 			return opcodes::BCD;
 			break;
-		case 85:
+		case 0x55:
 			return opcodes::REGDUMP;
 			break;
-		case 101:
+		case 0x65:
 			return opcodes::REGLOAD;
 			break;
 		}

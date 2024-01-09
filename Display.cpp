@@ -168,4 +168,5 @@ void CHIP8_Display::quitDisplay()
 	SDL_DestroyWindow(v_window);
 	SDL_Quit();
 }
+
 }//namespace chip8_emulator
