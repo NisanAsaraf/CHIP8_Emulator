@@ -30,7 +30,7 @@
     <None Include="..\..\..\Downloads\bc_test.ch8">
       <Filter>Assets</Filter>
     </None>
-    <None Include="BLINKY">
+    <None Include="roms\games\15PUZZLE">
       <Filter>Assets</Filter>
     </None>
   </ItemGroup>

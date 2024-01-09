@@ -301,10 +301,16 @@ void Chip8_Instructions::GetDelay(uint16_t a_data)
 void Chip8_Instructions::GetKey(uint16_t a_data)
 {
 	uint8_t X = (a_data & 0x0F00) >> 8;
+	uint8_t key = 0xFF;
 
-	if (_kbhit()) 
-	{ 
-		chipMemory.setRegister(X , static_cast<uint8_t>(_getch()));
+	if (_kbhit())
+	{
+		char keyPressed = _getch();
+		if (keyMap.find(keyPressed) != keyMap.end()) 
+		{
+			key = keyMap[keyPressed];
+		}
+		chipMemory.setRegister(X, key);
 	}
 	else
 	{

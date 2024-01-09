@@ -129,9 +129,9 @@
   <ItemGroup>
     <None Include="..\..\..\Downloads\bc_test.ch8" />
     <None Include="..\..\..\Downloads\ibm.ch8" />
-    <None Include="BLINKY" />
     <None Include="IBMLogo.ch8" />
     <None Include="packages.config" />
+    <None Include="roms\games\15PUZZLE" />
     <None Include="SCTEST.ch8" />
     <None Include="test_opcode.ch8" />
   </ItemGroup>
